@@ -1,0 +1,74 @@
+<ion-toolbar>
+  <!-- Botón de menú a la izquierda -->
+  <ion-buttons slot="start">
+    <ion-menu-button auto-hide="false" (click)="irHistorial()"></ion-menu-button>
+  </ion-buttons>
+
+  <ion-title>Menu</ion-title>
+
+  <!-- Botón de editar a la derecha -->
+  <ion-buttons slot="primary">
+    <ion-button>
+      <ion-icon slot="end" name="create"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">
+
+    <!-- Galería de fotos -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="5" *ngFor="let photo of photoService.photos; index as position">
+          <ion-img [src]="photo.webviewPath"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+
+    <!-- Respuestas -->
+  
+  <ion-content class="ion-padding">
+    <div *ngIf="respuesta">
+      <h2>Respuesta:</h2>
+      <p>{{ respuesta }}</p>
+    </div>
+  </ion-content>
+  
+  <ion-footer>
+    <ion-toolbar>
+  
+      <!-- Botón de cámara alineado a la izquierda -->
+      <ion-buttons slot="start">
+        <ion-button shape="round" size="small" color="dark" (click)="addPhotoToGallery()">
+          <ion-icon slot="icon-only" name="camera"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  
+      <!-- Input de texto en el centro -->
+      <ion-item lines="none" style="flex: 1;">
+        <ion-input
+          placeholder="Enviar mensaje a EcoChat"
+          [(ngModel)]="pregunta"
+          (keyup.enter)="obtenerRespuesta()">
+        </ion-input>
+      </ion-item>
+  
+      <!-- Botón de enviar alineado a la derecha -->
+      <ion-buttons slot="end">
+        <ion-button shape="round" color="dark" (click)="obtenerRespuesta()" [disabled]="isLoading">
+          <ion-icon slot="icon-only" name="send"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  
+    </ion-toolbar>
+  </ion-footer>

@@ -1,0 +1,7 @@
+{
+  "name": "ecochat",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
