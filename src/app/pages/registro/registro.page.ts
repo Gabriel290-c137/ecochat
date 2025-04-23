@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
+  IonHeader,
   IonContent, 
   IonButton, 
   IonCard, 
@@ -17,6 +18,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./registro.page.scss'],
   standalone: true,
   imports: [
+    IonHeader,
     IonContent, 
     IonButton, 
     IonCard, 

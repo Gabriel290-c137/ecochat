@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PhotoService } from '../../services/photo.service';
+import { UploadService } from '../../services/upload.service';
 import { Router } from '@angular/router';
 import { GeminiService } from '../../services/gemini.service';
-
+import { ChatService } from '../../services/ecochat.service';
+import { MicrophoneService } from '../../services/microphone.service';
 import { 
   IonButton,
   IonButtons,
@@ -26,13 +28,14 @@ import {
   IonRow,
   IonSpinner,
   IonTitle,
-  IonToolbar
+  IonToolbar,
+  IonFabList
 } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
 import {
   create, ellipsisHorizontal, ellipsisVertical,
-  helpCircle, personCircle, search, star, camera, send
+  helpCircle, personCircle, search, star, camera, send, add, mic
 } from 'ionicons/icons';
 
 @Component({
@@ -63,7 +66,8 @@ import {
     IonRow,
     IonSpinner,
     IonTitle,
-    IonToolbar
+    IonToolbar,
+    IonFabList
   ]
 })
 
@@ -72,15 +76,20 @@ export class MenuPage implements OnInit {
   pregunta: string = '';
   respuesta: string = '';
   isLoading: boolean = false;
+
   constructor(
     public photoService: PhotoService,
     private router: Router,
-    private geminiService: GeminiService
+    private geminiService: GeminiService,
+    private chatService: ChatService,
+    public uploadService: UploadService,
+    public microphoneService: MicrophoneService,
+
   ) {
     // Registrar íconos personalizados
     addIcons({
-      create, ellipsisHorizontal, ellipsisVertical,
-      helpCircle, personCircle, search, star, camera, send
+      create, ellipsisHorizontal, ellipsisVertical, add,
+      helpCircle, personCircle, search, star, camera, send, mic
     });
   }
 
@@ -88,23 +97,57 @@ export class MenuPage implements OnInit {
     this.router.navigate(['/historial']);
   }
 
+  irHome() {
+    this.router.navigate(['/home']);
+  }
+
   addPhotoToGallery() {
     this.photoService.addNewToGallery();
   }
 
+  addPhotoToUpload() {
+    this.uploadService.addNewToUpload();
+  }
+
   async obtenerRespuesta() {
-    if (this.pregunta.trim() === '') {
-      return; // No enviar si la pregunta está vacía
+    const fotoCamara = this.photoService.photos[0]?.base64 || null;
+    const fotoGaleria = this.uploadService.upload[0]?.base64 || null;
+    const base64 = fotoCamara || fotoGaleria;
+  
+    if (this.pregunta.trim() === '' && !base64) {
+      return; // No enviar si no hay ni pregunta ni imagen
     }
+  
     this.isLoading = true;
-    this.respuesta = ''; // Limpiar la respuesta anterior
+    this.respuesta = '';
   
     try {
-      this.respuesta = await this.geminiService.generateResponse(this.pregunta);
+      if (base64) {
+        this.respuesta = await this.geminiService.generateResponseWithImage(this.pregunta, base64);
+      } else {
+        this.respuesta = await this.geminiService.generateResponse(this.pregunta);
+      }
     } finally {
       this.isLoading = false;
     }
   }
+
+  enviar() {
+    this.chatService.enviarPregunta(this.pregunta).subscribe((res) => {
+      this.respuesta = res.respuesta;
+    });
+  }
+  
+  grabarAudio() {
+    if (!this.microphoneService.isRecording) {
+      this.microphoneService.startListening((textoReconocido: string) => {
+        this.pregunta = textoReconocido;
+      });
+    } else {
+      this.microphoneService.stopListening();
+    }
+  }
+
   ngOnInit() {}
   
 }

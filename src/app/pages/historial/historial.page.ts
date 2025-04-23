@@ -12,8 +12,6 @@ import {
   IonHeader, 
   IonToolbar, 
   IonButtons, 
-  IonSearchbar, 
-  IonFooter
 } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
@@ -36,8 +34,6 @@ import { close} from 'ionicons/icons';
     IonButtons, 
     CommonModule, 
     FormsModule, 
-    IonSearchbar, 
-    IonFooter
   ]
 })
 

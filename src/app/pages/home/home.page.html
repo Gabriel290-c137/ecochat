@@ -1,0 +1,94 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="greeting">
+    <h1>¡Me alegra verte! 🌿</h1>
+    <p>Consejos para cuidar el medio ambiente:</p>
+  </div>
+
+  <!-- 1. Ahorrar agua -->
+  <ion-card class="custom-card">
+    <img src="assets/img/agua.jpg" alt="Ahorrar agua" />
+    <ion-card-content>
+      <h2>💧 Ahorra agua</h2>
+      <p>Cierra el grifo mientras te cepillas, repara fugas y reutiliza el agua cuando puedas.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 2. Desenchufar dispositivos -->
+  <ion-card class="custom-card">
+    <img src="assets/img/dispositivos.jpg" alt="Desenchufar dispositivos" />
+    <ion-card-content>
+      <h2>🔌 Desconecta lo que no uses</h2>
+      <p>Los aparatos en "stand by" siguen consumiendo energía. ¡Desenchúfalos!</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 3. Bombillas de bajo consumo -->
+  <ion-card class="custom-card">
+    <img src="assets/img/bombilla.jpg" alt="Bombillas de bajo consumo" />
+    <ion-card-content>
+      <h2>💡 Usa bombillas LED</h2>
+      <p>Las bombillas de bajo consumo duran más y reducen tu factura energética.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 4. Calefacción y aire -->
+  <ion-card class="custom-card">
+    <img src="assets/img/clima.jpg" alt="Aire y calefacción" />
+    <ion-card-content>
+      <h2>🌡️ Usa el clima con conciencia</h2>
+      <p>No abuses de la calefacción o el aire acondicionado. Viste apropiadamente y ventila bien tu hogar.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 5. Productos a granel -->
+  <ion-card class="custom-card">
+    <img src="assets/img/granel.jpg" alt="Productos a granel" />
+    <ion-card-content>
+      <h2>🛒 Compra a granel</h2>
+      <p>Evita los empaques innecesarios. Comprar al peso reduce el plástico y te permite ahorrar.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 6. Reciclar -->
+  <ion-card class="custom-card">
+    <img src="assets/img/reciclar.jpg" alt="Reciclar" />
+    <ion-card-content>
+      <h2>♻️ Recicla y separa</h2>
+      <p>Separa papel, plástico, vidrio y orgánicos. ¡Cada gesto cuenta!</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 7. Transporte sostenible -->
+  <ion-card class="custom-card">
+    <img src="assets/img/transporte.jpg" alt="Transporte" />
+    <ion-card-content>
+      <h2>🚲 Usa transporte ecológico</h2>
+      <p>Camina, anda en bici o usa transporte público. Reduce tu huella de carbono.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 8. Productos de proximidad -->
+  <ion-card class="custom-card">
+    <img src="assets/img/proximidad.jpg" alt="Proximidad" />
+    <ion-card-content>
+      <h2>🌽 Consume local</h2>
+      <p>Compra productos de tu región. Apoyas la economía local y evitas emisiones por transporte.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 9. Economía circular -->
+  <ion-card class="custom-card">
+    <img src="assets/img/economia.jpg" alt="Economía circular" />
+    <ion-card-content>
+      <h2>🔁 Economía circular</h2>
+      <p>Reutiliza, repara, dona y transforma lo que ya tienes antes de comprar algo nuevo.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón flotante -->
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button color="success" (click)="irMenu()">
+      <ion-icon name="leaf-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

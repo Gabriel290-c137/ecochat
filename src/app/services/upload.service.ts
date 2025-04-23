@@ -1,23 +1,23 @@
+import { UserPhoto } from '../interfaces/photo.interface';
 import { Injectable } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { UserPhoto } from '../interfaces/photo.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PhotoService {
-  public photos: UserPhoto[] = [];
+export class UploadService {
+  public upload: UserPhoto[] = [];
+  constructor() { }
 
-  constructor() {}
-
-  public async addNewToGallery() {
+  public async addNewToUpload() {
     const capturedPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Base64,
-      source: CameraSource.Camera,
+      source: CameraSource.Photos,
       quality: 100
     });
 
-    this.photos.unshift({
+    // Guardar foto en base64
+    this.upload.unshift({
       filepath: "local-photo.jpg",
       webviewPath: `data:image/jpeg;base64,${capturedPhoto.base64String}`,
       base64: capturedPhoto.base64String

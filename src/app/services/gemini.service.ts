@@ -11,7 +11,6 @@ export class GeminiService {
 
   constructor() {
     this.genAI = new GoogleGenerativeAI(environment.geminiApiKey);
-    // Intenta con el modelo gemini-2.0-flash (como en el ejemplo de curl)
     this.model = this.genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
   }
 
@@ -23,6 +22,34 @@ export class GeminiService {
     } catch (error: any) {
       console.error('Error al generar la respuesta:', error);
       return 'Ocurrió un error al obtener la respuesta.';
+    }
+  }
+  
+  async generateResponseWithImage(prompt: string, base64Image: string): Promise<string> {
+    try {
+      const result = await this.model.generateContent({
+        contents: [
+          {
+            parts: [
+              {
+                text: prompt,
+              },
+              {
+                inlineData: {
+                  mimeType: "image/jpeg",
+                  data: base64Image
+                }
+              }
+            ]
+          }
+        ]
+      });
+  
+      const response = await result.response;
+      return response.text();
+    } catch (error: any) {
+      console.error('Error al generar la respuesta con imagen:', error);
+      return 'Ocurrió un error al obtener la respuesta con imagen.';
     }
   }
 }

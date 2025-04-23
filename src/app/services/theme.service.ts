@@ -1,42 +1,47 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
-
-  private storageKey = 'dark-mode';
+  private storageKey = 'user-theme';
 
   constructor() {
-    this.initializeTheme();
+    // Aplicar el tema efectivo al inicio
+    this.applyTheme(this.getEffectiveTheme());
+
+    // Escuchar los cambios del SO SIEMPRE para actualizar si no hay preferencia del usuario
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!this.hasUserPreference()) {
+        this.applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
   }
 
   initializeTheme(): void {
-    const savedTheme = localStorage.getItem(this.storageKey);
+    this.applyTheme(this.getEffectiveTheme());
+  }
 
-    if (savedTheme === null) {
-      // Aplica modo claro por defecto
-      this.setDarkTheme(false);
-      localStorage.setItem(this.storageKey, 'false');
-    } else {
-      this.setDarkTheme(savedTheme === 'true');
+  private hasUserPreference(): boolean {
+    return localStorage.getItem(this.storageKey) !== null;
+  }
+
+  private getSystemTheme(): 'dark' | 'light' {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  private getEffectiveTheme(): 'dark' | 'light' {
+    const stored = localStorage.getItem(this.storageKey);
+    if (stored === 'dark' || stored === 'light') {
+      return stored;
     }
+    return this.getSystemTheme();
   }
 
-  toggleDarkTheme(shouldAdd: boolean): void {
-    localStorage.setItem(this.storageKey, String(shouldAdd));
-    this.setDarkTheme(shouldAdd);
-  }
-
-  setDarkTheme(isDark: boolean): void {
-    document.documentElement.classList.toggle('ion-palette-dark', isDark);
-  }
-
-  getCurrentTheme(): boolean {
-    const savedTheme = localStorage.getItem(this.storageKey);
-    if (savedTheme !== null) {
-      return savedTheme === 'true';
-    }
-    return false;
+  private applyTheme(theme: 'dark' | 'light'): void {
+    document.documentElement.classList.remove('ion-palette-dark', 'ion-palette-light');
+    document.documentElement.classList.add(
+      theme === 'dark' ? 'ion-palette-dark' : 'ion-palette-light'
+    );
   }
 }

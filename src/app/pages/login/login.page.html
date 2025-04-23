@@ -1,17 +1,19 @@
-<ion-content [fullscreen]="true">
-  <div class="container">    
-    <ion-card class="login-card">
-      <ion-item>
-        <ion-input [(ngModel)]="usuario" placeholder="Usuario"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input [(ngModel)]="password" type="password" placeholder="Contraseña"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-checkbox label-placement="end">Recuérdame</ion-checkbox>
-      </ion-item>
-      <ion-button expand="full" color="dark" (click)="iniciarSesion()">Iniciar sesión</ion-button>
-      <ion-button expand="full" color="dark" fill="outline" (click)="irARegistro()">Registrarse</ion-button>
-    </ion-card>    
-  </div>
+<ion-header class="ion-no-border">
+</ion-header>
+
+<ion-content class="ion-padding"> <div class="login-page">
+  <ion-card class="login-page">
+    <ion-item>
+      <ion-input [(ngModel)]="usuario" placeholder="Usuario"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="password" type="password" placeholder="Contraseña"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox color="dark" label-placement="end">Recuérdame</ion-checkbox>
+    </ion-item>
+    <ion-button expand="full" color="dark" (click)="iniciarSesion()">Iniciar sesión</ion-button>
+    <ion-button expand="full" color="dark" fill="outline" (click)="irARegistro()">Registrarse</ion-button>
+  </ion-card>
+</div>
 </ion-content>
