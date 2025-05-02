@@ -1,4 +1,4 @@
-# [Nombre de tu proyecto - sugerencia: Asistente Ambiental]
+# [EcoChat - sugerencia: Asistente Ambiental]
 
 ## Descripción
 
