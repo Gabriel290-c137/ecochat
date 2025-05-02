@@ -1,4 +1,4 @@
-# [EcoChat - sugerencia: Asistente Ambiental]
+# [EcoChat: Asistente Ambiental]
 
 ## Descripción
 
