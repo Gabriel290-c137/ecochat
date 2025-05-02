@@ -4,12 +4,12 @@
     <ion-buttons slot="start">
       <ion-menu-button auto-hide="false" (click)="irHistorial()"></ion-menu-button>
     </ion-buttons>
-    
+
     <ion-title>Menu</ion-title>
 
     <!-- Botón de editar a la derecha -->
     <ion-buttons slot="primary">
-      <ion-button>
+      <ion-button (click)="nuevaConversacion()">
         <ion-icon slot="end" name="create"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -18,43 +18,75 @@
 
 <ion-content class="ion-padding">
   <div class="page-login">
-    <!-- Galería de fotos -->
+
+    <!-- Galería de fotos (Cámara) -->
     <ion-grid>
       <ion-row>
-        <ion-col size="5" *ngFor="let photo of photoService.photos; index as position">
+        <ion-col size="5" *ngFor="let photo of photoService.photos">
           <ion-img [src]="photo.webviewPath"></ion-img>
         </ion-col>
       </ion-row>
     </ion-grid>
 
+    <!-- Galería de fotos (Galería) -->
     <ion-grid>
       <ion-row>
-        <ion-col size="5" *ngFor="let photo of uploadService.upload; index as position">
+        <ion-col size="5" *ngFor="let photo of uploadService.upload">
           <ion-img [src]="photo.webviewPath"></ion-img>
         </ion-col>
       </ion-row>
     </ion-grid>
 
-    <!-- Respuesta del asistente -->
-    <div *ngIf="respuesta">
-      <h2>Respuesta:</h2>
-      <p>{{ respuesta }}</p>
+    <!-- Galería de archivos -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="5" *ngFor="let file of fileUploadService.files">
+          <ion-img [src]="file.webviewPath"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Conversaciones agrupadas por fecha -->
+    <div *ngFor="let grupo of mensajesAgrupadosPorFecha; let i = index" style="margin-top: 20px;">
+
+      <!-- Mostrar fecha ya formateada -->
+      <div style="text-align: center; font-size: 12px; color: gray; margin-bottom: 10px;"
+           *ngIf="grupo.mensajes.length > 0">
+        {{ grupo.fecha }}
+      </div>
+
+      <!-- Mensajes del grupo -->
+      <div *ngFor="let mensaje of grupo.mensajes">
+        
+        <!-- Usuario -->
+        <div *ngIf="mensaje.from === 'user'" style="text-align: right; margin-bottom: 10px;">
+          <ion-chip style="background-color: #e0e0e0; color: #000000; padding: 8px;">
+            <ion-label>{{ mensaje.text }}</ion-label>
+          </ion-chip>
+        </div>
+
+        <!-- Asistente -->
+        <div *ngIf="mensaje.from === 'assistant'" style="text-align: left; margin-bottom: 20px; color: white;">
+          {{ mensaje.text }}
+        </div>
+
+      </div>
+
     </div>
   </div>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <!-- Botón de cámara y menú alineados a la izquierda -->
+    <!-- Botones a la izquierda -->
     <ion-buttons slot="start">
       <ion-button shape="round" size="small" color="dark" (click)="addPhotoToGallery()">
         <ion-icon slot="icon-only" name="camera"></ion-icon>
       </ion-button>
-
       <ion-menu-button auto-hide="false" (click)="irHome()"></ion-menu-button>
     </ion-buttons>
 
-    <!-- Input de texto al centro -->
+    <!-- Input de texto -->
     <ion-item lines="none" style="flex: 1;">
       <ion-input
         placeholder="Enviar mensaje a EcoChat"
@@ -63,22 +95,23 @@
       </ion-input>
     </ion-item>
 
-    <!-- Botones alineados a la derecha -->
+    <!-- Botones a la derecha -->
     <ion-buttons slot="end">
-      <!-- Botón de envío original (negro) -->
       <ion-button shape="round" color="dark" (click)="obtenerRespuesta()" [disabled]="isLoading">
         <ion-icon slot="icon-only" name="send"></ion-icon>
       </ion-button>
-
       <ion-button shape="round" color="dark" (click)="grabarAudio()" [disabled]="isLoading">
         <ion-icon slot="icon-only" name="mic"></ion-icon>
       </ion-button>
-
+      <ion-button shape="round" color="dark" (click)="irControl()" [disabled]="isLoading">
+        <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
 
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-right: 90px; margin-bottom: -10px;">
+<!-- Botón flotante -->
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-right: 140px; margin-bottom: -10px;">
   <ion-fab-button color="dark" size="small">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
@@ -87,14 +120,11 @@
     <ion-fab-button color="dark" size="small" (click)="addPhotoToUpload()">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
-    
     <ion-fab-button color="success" size="small" (click)="enviar()" [disabled]="isLoading">
       <ion-icon name="send"></ion-icon>
     </ion-fab-button>
+    <ion-fab-button color="success" size="small" (click)="addFileToUpload()" [disabled]="isLoading">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
   </ion-fab-list>
 </ion-fab>
-
-      <!-- Nuevo botón de envío (verde) -->
-      <!-- <ion-button shape="round" color="success" (click)= "enviar" [disabled]="isLoading">
-        <ion-icon slot="icon-only" name="send"></ion-icon>
-      </ion-button> -->

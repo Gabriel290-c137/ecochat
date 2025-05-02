@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
+export class EcoChatService {
   private apiUrl = 'http://127.0.0.1:5000/chat';
 
   constructor(private http: HttpClient) {}

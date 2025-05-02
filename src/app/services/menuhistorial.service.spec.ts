@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EcoChatService } from './ecochat.service';
+import { MenuHistorialService } from './menuhistorial.service';
 
-describe('EcochatService', () => {
-  let service: EcoChatService;
+describe('MenuhistorialService', () => {
+  let service: MenuHistorialService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(EcoChatService);
+    service = TestBed.inject(MenuHistorialService);
   });
 
   it('should be created', () => {

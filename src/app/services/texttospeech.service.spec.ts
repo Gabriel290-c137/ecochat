@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EcoChatService } from './ecochat.service';
+import { TextToSpeechService } from './texttospeech.service';
 
-describe('EcochatService', () => {
-  let service: EcoChatService;
+describe('TextToSpeechService', () => {
+  let service: TextToSpeechService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(EcoChatService);
+    service = TestBed.inject(TextToSpeechService);
   });
 
   it('should be created', () => {

@@ -8,26 +8,37 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button shape="round" color="dark" (click)="irCOnfiguracion()">
-        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle"></ion-icon>
+      <ion-button shape="round" color="dark" (click)="irConfiguracion()">
+        <ion-icon slot="icon-only" name="person"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<!-- Contenido con lista de conversaciones -->
-<ion-content>
-  <ion-list lines="none">
-    <ion-item>
-      <ion-label>No Lines</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>No Lines</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>No Lines</ion-label>
-    </ion-item>
-  </ion-list>
+<ion-content class="ion-padding">
+
+  <!-- Mostrar títulos y etiquetas si NO presionó el botón -->
+  <div *ngIf="!mostrarLista" class="centrado">
+    <h2>Conversaciones y páginas</h2>
+    <p>Tus conversaciones y páginas<br>se guardarán aquí.</p>
+  </div>
+
+  <!-- Mostrar lista si presionó el botón -->
+  <div *ngIf="mostrarLista">
+    <ion-list lines="none">
+      <ion-item class="espaciado" *ngFor="let conversacion of conversaciones; let i = index">
+        <ion-button expand="block" (click)="abrirConversacion(i)" color="dark">
+          Conversación {{ i + 1 }}
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Botón LOCAL para cambiar el estado -->
+  <div class="centrado" style="margin-top: 20px;">
+    <ion-button shape="round" color="dark" (click)="cambiarEstadoLocal()">
+      {{ mostrarLista ? 'Ocultar' : 'Mostrar' }}
+    </ion-button>
+  </div>
+
 </ion-content>
-
-
