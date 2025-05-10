@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
@@ -36,13 +36,14 @@ export class RegistroPage {
   constructor(private router: Router, private authService: AuthService) {}
 
   registrar() {
-    this.authService.register(this.email, this.password).subscribe({
-      next: () => {
+    this.authService.register(this.email, this.password)
+      .then(() => {
         alert('Registro exitoso');
         this.router.navigate(['/login']);
-      },
-      error: (err) => alert('Error en el registro: ' + err.message),
-    });
+      })
+      .catch((err: Error) => {
+        alert('Error en el registro: ' + err.message);
+      });
   }
   ngOnInit() {
   }

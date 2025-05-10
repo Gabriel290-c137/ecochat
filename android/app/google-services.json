@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "275266328069",
-    "project_id": "registrodeusuarios-8bfd2",
-    "storage_bucket": "registrodeusuarios-8bfd2.firebasestorage.app"
+    "project_number": "75493471794",
+    "project_id": "ecochat-5ab68",
+    "storage_bucket": "ecochat-5ab68.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:275266328069:android:fcf75b094adbf63d252e6c",
+        "mobilesdk_app_id": "1:75493471794:android:300d6fad6ab23a7745ee2b",
         "android_client_info": {
           "package_name": "com.ecochat.myapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "275266328069-mj9ep1b2duhb21hgfh194bbmfacslr5k.apps.googleusercontent.com",
+          "client_id": "75493471794-no2jajlf36mb0rm9b6eoedtg81bkcjuo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDO6-2f0P_hULh4cgKMpLhqQ6d3mGfHujE"
+          "current_key": "AIzaSyBGyQymmVUailJSfbmJSQnFDzx6Ez8CGeQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "275266328069-mj9ep1b2duhb21hgfh194bbmfacslr5k.apps.googleusercontent.com",
+              "client_id": "75493471794-no2jajlf36mb0rm9b6eoedtg81bkcjuo.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

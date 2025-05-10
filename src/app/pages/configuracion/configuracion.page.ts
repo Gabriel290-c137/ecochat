@@ -8,10 +8,12 @@ import {
   IonIcon,
   IonTitle,
   IonToolbar,
+  IonItem,
+  IonLabel,
+  IonList,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { personCircle, personCircleOutline, sunny, sunnyOutline } from 'ionicons/icons';
-import { ThemeService } from '../../services/theme.service';
+import { personCircle, personCircleOutline, sunny, sunnyOutline} from 'ionicons/icons';
 
 @Component({
   selector: 'app-configuracion',
@@ -27,13 +29,15 @@ import { ThemeService } from '../../services/theme.service';
     IonIcon,
     IonTitle,
     IonToolbar,
+    IonItem,
+    IonLabel,
+    IonList,
   ],
 })
 export class ConfiguracionPage implements OnInit {
-  constructor(private themeService: ThemeService) {
+  constructor() {
     addIcons({ personCircle, personCircleOutline, sunny, sunnyOutline });
   }
-
   ngOnInit() {
   }
 }

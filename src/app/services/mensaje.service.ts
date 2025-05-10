@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Timestamp } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +8,15 @@ export class MensajeService {
 
   constructor() {}
 
-  agruparPorFecha(mensajes: Array<{ date: Date }>) {
+  agruparPorFecha(mensajes: Array<{ date: Date | Timestamp }>) {
     const grupos: { [key: string]: any[] } = {};
 
     for (const mensaje of mensajes) {
-      const fechaObj = new Date(mensaje.date);
+      // Convertir Timestamp a Date si es necesario
+      const fechaObj = (mensaje.date instanceof Timestamp)
+        ? mensaje.date.toDate()
+        : new Date(mensaje.date);
+
       const fechaClave = fechaObj.toLocaleDateString('es-ES', {
         weekday: 'long',
         year: 'numeric',
@@ -26,7 +31,7 @@ export class MensajeService {
     }
 
     return Object.keys(grupos).map(fecha => ({
-      fecha: fecha, // ya es string
+      fecha,
       mensajes: grupos[fecha]
     }));
   }

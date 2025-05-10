@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: "AIzaSyCqloMnEWmJ5Xuta03aSfuX0iyr9kLpR4s",
-    authDomain: "registrodeusuarios-8bfd2.firebaseapp.com",
-    projectId: "registrodeusuarios-8bfd2",
-    storageBucket: "registrodeusuarios-8bfd2.firebasestorage.app",
-    messagingSenderId: "275266328069",
-    appId: "1:275266328069:web:900173faa396c043252e6c"
+    apiKey: "AIzaSyCjp6UteH_heVr_WFbFF8JCTwELueLj2II",
+    authDomain: "ecochat-5ab68.firebaseapp.com",
+    projectId: "ecochat-5ab68",
+    storageBucket: "ecochat-5ab68.firebasestorage.app",
+    messagingSenderId: "75493471794",
+    appId: "1:75493471794:web:a4819ef13b42e7c445ee2b"
   },
   geminiApiKey: "AIzaSyD6kwJcaHyXArWuM_RF824Nbl39TO4yePo"
 };

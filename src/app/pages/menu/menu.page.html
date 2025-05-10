@@ -63,6 +63,13 @@
           <ion-chip style="background-color: #e0e0e0; color: #000000; padding: 8px;">
             <ion-label>{{ mensaje.text }}</ion-label>
           </ion-chip>
+
+          <!-- Imágenes del usuario -->
+          <div style="margin-top: 10px;" *ngIf="mensaje.fotos">
+            <ion-img *ngIf="mensaje.fotos.camara" [src]="mensaje.fotos.camara.startsWith('data:') ? mensaje.fotos.camara : 'data:image/jpeg;base64,' + mensaje.fotos.camara" style="max-width: 100%; max-height: 200px;"></ion-img>
+            <ion-img *ngIf="mensaje.fotos.galeria" [src]="mensaje.fotos.galeria.startsWith('data:') ? mensaje.fotos.galeria : 'data:image/jpeg;base64,' + mensaje.fotos.galeria" style="max-width: 100%; max-height: 200px;"></ion-img>
+            <ion-img *ngIf="mensaje.fotos.archivo" [src]="mensaje.fotos.archivo.startsWith('data:') ? mensaje.fotos.archivo : 'data:image/jpeg;base64,' + mensaje.fotos.archivo" style="max-width: 100%; max-height: 200px;"></ion-img>
+          </div>
         </div>
 
         <!-- Asistente -->
@@ -71,12 +78,11 @@
         </div>
 
       </div>
-
     </div>
   </div>
 </ion-content>
 
-<ion-footer>
+<ion-footer [style.bottom.px]="keyboardHeight" style="transition: bottom 0.3s;">
   <ion-toolbar>
     <!-- Botones a la izquierda -->
     <ion-buttons slot="start">
@@ -89,6 +95,7 @@
     <!-- Input de texto -->
     <ion-item lines="none" style="flex: 1;">
       <ion-input
+        #ecoInput
         placeholder="Enviar mensaje a EcoChat"
         [(ngModel)]="pregunta"
         (keyup.enter)="obtenerRespuesta()">
@@ -111,7 +118,9 @@
 </ion-footer>
 
 <!-- Botón flotante -->
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-right: 140px; margin-bottom: -10px;">
+<ion-fab vertical="bottom" horizontal="end" slot="fixed"
+          [style.marginBottom]="isKeyboardOpen ? '335px' : '-10px'"
+          style="margin-right: 140px; transition: margin-bottom 0.3s;">
   <ion-fab-button color="dark" size="small">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
@@ -124,6 +133,9 @@
       <ion-icon name="send"></ion-icon>
     </ion-fab-button>
     <ion-fab-button color="success" size="small" (click)="addFileToUpload()" [disabled]="isLoading">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button color="danger" size="small" (click)="irAlLugar()" [disabled]="isLoading">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
   </ion-fab-list>
