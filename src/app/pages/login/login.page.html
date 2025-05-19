@@ -1,19 +1,42 @@
 <ion-header class="ion-no-border">
 </ion-header>
 
-<ion-content class="ion-padding"> <div class="login-page">
-  <ion-card class="login-page">
-    <ion-item>
-      <ion-input [(ngModel)]="usuario" placeholder="Usuario"></ion-input>
+<ion-content class="ion-padding">
+
+  <div class="login-page">
+      <!-- Texto arriba -->
+      <div class="texto-bienvenida">
+        <h2>Conoce a tu asistente de IA</h2>
+        <p>Crea una cuenta o inicia sesión para que pueda ayudarte a guardar tus ideas</p>
+      </div>
+
+    <ion-item [ngClass]="{'activo': usuario}">
+      <ion-icon name="person" slot="start" [class.oculto]="usuario"></ion-icon>
+      <ion-input #ecoInput [(ngModel)]="usuario" placeholder="Usuario"></ion-input>
     </ion-item>
-    <ion-item>
+
+    <ion-item [ngClass]="{'activo': password}">
+      <ion-icon name="lock-closed" slot="start" [class.oculto]="password"></ion-icon>
       <ion-input [(ngModel)]="password" type="password" placeholder="Contraseña"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-checkbox color="dark" label-placement="end">Recuérdame</ion-checkbox>
-    </ion-item>
-    <ion-button expand="full" color="dark" (click)="iniciarSesion()">Iniciar sesión</ion-button>
-    <ion-button expand="full" color="dark" fill="outline" (click)="irARegistro()">Registrarse</ion-button>
-  </ion-card>
-</div>
+
+    <ion-button (click)="iniciarSesion()"> 
+      <ion-icon name="key" slot="start"></ion-icon>
+      Iniciar sesión
+    </ion-button>
+
+    <ion-button (click)="ConGoogle()" class="google-button">
+      <img src="assets/icon/google_icon-icons.com_62736.svg" slot="start" class="google-icon" alt="Google">
+      Iniciar sesión con Google
+    </ion-button>
+
+    <ion-button (click)="irARegistro()">
+      <ion-icon name="people" slot="start"></ion-icon>
+      Registrarse
+    </ion-button>
+
+      <div>
+        <img src="assets/icon/LogoUCB.png" alt="Logo UCB" class="logo-ucb" *ngIf="!tecladoAbierto">
+      </div>
+  </div>
 </ion-content>

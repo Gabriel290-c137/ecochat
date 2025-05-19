@@ -1,0 +1,158 @@
+:host {
+  --ion-background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+ion-content {
+  background: var(--ion-background-color);
+}
+
+// Estilos generales para la página de login
+.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .texto-bienvenida {
+    text-align: center;
+    margin-bottom: 1.5rem;
+
+    h2 {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: gray;
+      margin: 0;
+    }
+  }
+
+  ion-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    color: var(--text-dark);
+  }
+
+  ion-item {
+    --background: transparent;
+    --highlight-background: transparent;
+    --highlight-color-focused: transparent;
+    --border-color: transparent;
+    --inner-border-width: 0px;
+
+    border: none !important;
+    box-shadow: none !important;
+    position: relative;
+    margin-bottom: 1rem;
+
+    ion-input {
+      color: var(--text-dark);
+      --background: transparent;
+      width: 100%;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    &.activo::after,
+    ion-input:focus-visible + &::after {
+      background-color: var(--text-dark);
+    }
+
+    ion-input::part(native) {
+      border: none;
+      outline: none;
+      background: transparent;
+    }
+
+    ion-icon[slot="start"] {
+      font-size: 14px;
+      margin-inline-end: 4px;
+      width: 14px;
+      visibility: visible;
+    }
+
+    ion-icon.oculto {
+      visibility: hidden !important;
+    }
+  }
+
+  ion-button {
+    margin-top: 1rem;
+    text-transform: none;
+    width: 100%;
+    color: var(--text-dark);
+    --background: rgba(255, 255, 255, 0.08);
+    --border-radius: 5rem;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+
+    .google-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+  }
+
+  .logo-ucb {
+    width: 160px;
+    opacity: 0.8;
+    transition: all 0.3s ease-in-out;
+    margin-top: 30px;
+  }
+}
+
+// Modo claro activado por preferencia del sistema
+@media (prefers-color-scheme: light) {
+  ion-content {
+    --background: var(--background-light);
+    color: var(--text-light);
+  }
+
+  .login-page {
+    ion-card {
+      color: var(--text-light);
+    }
+
+    ion-item {
+      ion-input {
+        color: var(--text-light);
+      }
+
+      &::after {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+
+      &.activo::after,
+      ion-input:focus-visible + &::after {
+        background-color: var(--text-light);
+      }
+    }
+
+    ion-button {
+      color: var(--text-light);
+      --background: rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  .logo-ucb {
+    opacity: 1;
+  }
+}

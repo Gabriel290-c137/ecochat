@@ -39,3 +39,84 @@
 ion-item {
     --transition: none;
   }
+
+/* --- Fuente Ginto: estilos normales --- */
+@font-face {
+  font-family: 'Ginto';
+  src: url('/assets/fonts/Ginto/Ginto Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ginto';
+  src: url('/assets/fonts/Ginto/Ginto Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ginto';
+  src: url('/assets/fonts/Ginto/Ginto Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ginto';
+  src: url('/assets/fonts/Ginto/Ginto Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ginto';
+  src: url('/assets/fonts/Ginto/Ginto Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ginto';
+  src: url('/assets/fonts/Ginto/Ginto Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* --- Fuente Ginto: estilos itálicos --- */
+@font-face {
+  font-family: 'Ginto';
+  src: url('/assets/fonts/Ginto/Ginto Thin Italic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Ginto';
+  src: url('/assets/fonts/Ginto/Ginto Light Italic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Ginto';
+  src: url('/assets/fonts/Ginto/Ginto Regular Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Ginto';
+  src: url('/assets/fonts/Ginto/Ginto Medium Italic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Ginto';
+  src: url('/assets/fonts/Ginto/Ginto Bold Italic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Ginto';
+  src: url('/assets/fonts/Ginto/Ginto Black Italic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* --- Fuente por defecto en toda la app --- */
+* {
+  font-family: 'Ginto', sans-serif;
+}

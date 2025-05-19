@@ -28,50 +28,41 @@
       <ion-icon name="person-circle" style="font-size: 32px;"></ion-icon>
     </div>
     <div>
-      <h2 style="font-weight: bold; margin: 0;">Limbert Gabriel</h2>
-      <p style="color: #666; margin: 0;">limbert.villcaucb.edu.bo</p>
+      <h2 style="font-weight: bold; margin: 0;">{{ nombre }}</h2>
+      <p style="color: #666; margin: 0;">{{ correo }}</p>
     </div>
   </div>
 
   <ion-list lines="none">
-    <ion-item>
-      <ion-label>
-        <h3 style="font-weight: bold;">Haz más con Ecochat-Ultimate</h3>
-        <p>Obtener 1 mes gratis</p>
+      <ion-item lines="none">
+    <ion-button color="dark" expand="block" fill="clear" (click)="irDonaciones()">
+      <ion-label class="ion-text-start" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <h3 style="margin: 0;">Donaciones</h3>
+        <p style="margin: 0;">puedes ayudarnos</p>
       </ion-label>
-    </ion-item>
-
+    </ion-button>
+  </ion-item>
   </ion-list>
 
   <ion-list lines="none" style="margin-top: 30px;">
     <ion-item>
-      <ion-label>
-        <h3>Cuenta</h3>
-      </ion-label>
+        <ion-button fill="clear" color="dark" (click)="irCuenta()">Cuenta</ion-button>
     </ion-item>
 
     <ion-item>
-      <ion-label>
-        <h3>Realizar encuesta más reciente</h3>
-      </ion-label>
+      <ion-button fill="clear" color="dark" (click)="abrirFormulario()">Realizar encuesta más reciente</ion-button>
     </ion-item>
 
     <ion-item>
-      <ion-label>
-        <h3>Enviar comentarios</h3>
-      </ion-label>
+      <ion-button fill="clear"color="dark" (click)="abrirComentarios()">Enviar comentarios</ion-button>
     </ion-item>
 
     <ion-item>
-      <ion-label>
-        <h3>Acerca de</h3>
-      </ion-label>
+      <ion-button fill="clear" color="dark" (click)="irARInfopage()">Acerca de</ion-button>
     </ion-item>
 
     <ion-item>
-      <ion-label>
-        <h3 style="color: #d9534f;">Cerrar sesión</h3>
-      </ion-label>
+      <ion-button fill="clear" fill="clear" color="danger" (click)="CerrarSesion()">Cerrar Sesión</ion-button>
     </ion-item>
   </ion-list>
 

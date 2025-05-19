@@ -1,0 +1,15 @@
+:host {
+  --ion-background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+ion-content {
+  background: var(--ion-background-color);
+}
+
+@media (prefers-color-scheme: light) {
+  ion-content {
+    --background: var(--background-light);
+    color: var(--text-light);
+  }
+}

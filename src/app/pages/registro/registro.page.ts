@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthgoogleService } from '../../services/authgoogle.service';
 import { 
   IonHeader,
   IonContent, 
@@ -33,18 +34,23 @@ export class RegistroPage {
   email = '';
   password = '';
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private authGoogleService: AuthgoogleService) {}
 
   registrar() {
     this.authService.register(this.email, this.password)
-      .then(() => {
-        alert('Registro exitoso');
-        this.router.navigate(['/login']);
+      .then((estado) => {
+        if (estado === 'existente') {
+          alert('Usted ya se encuentra registrado');
+        } else {
+          alert('Registro exitoso');
+          this.router.navigate(['/login']);
+        }
       })
       .catch((err: Error) => {
         alert('Error en el registro: ' + err.message);
       });
   }
+
   ngOnInit() {
   }
 }

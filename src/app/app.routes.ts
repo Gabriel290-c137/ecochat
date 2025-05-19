@@ -38,6 +38,20 @@ export const routes: Routes = [
     path: 'control',
     loadComponent: () => import('./pages/control/control.page').then( m => m.ControlPage)
   },
-
+  {
+    path: 'infopage',
+    loadComponent: () => import('./pages/infopage/infopage.page').then( m => m.InfopagePage)
+  },
+  {
+    path: 'cuenta',
+    loadComponent: () => import('./pages/cuenta/cuenta.page').then( m => m.CuentaPage)
+  },
+  {
+    path: 'localizaciones',
+    loadComponent: () => import('./pages/localizaciones/localizaciones.page').then( m => m.LocalizacionesPage)
+  },  {
+    path: 'donaciones',
+    loadComponent: () => import('./pages/donaciones/donaciones.page').then( m => m.DonacionesPage)
+  },
 
 ];

@@ -10,13 +10,16 @@ import { FileUploadService } from '../../services/fileupload.service';
 import { MicrophoneService } from '../../services/microphone.service';
 import { MensajeService } from '../../services/mensaje.service';
 import { AuthService } from '../../services/auth.service';
-import { Firestore, collection, addDoc, doc, getDocs, query, orderBy, limit} from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, doc, getDocs, query, orderBy, limit, setDoc, getDoc} from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { MapsService } from '../../services/maps.service';
+// import { MapsService } from '../../services/maps.service';
 import { Keyboard } from '@capacitor/keyboard';
+import { TextToSpeechService } from '../../services/texttospeech.service';
 import { ViewChild } from '@angular/core';
 
 import { 
+  IonModal,
+  IonTextarea,
   IonChip,
   IonCardHeader,
   IonCardSubtitle,
@@ -47,8 +50,17 @@ import {
 import { addIcons } from 'ionicons';
 import {
   create, ellipsisVertical,
-  helpCircle, personCircle, search, star, camera, send, add, mic,
-  filterOutline
+  helpCircle, personCircle, logoFirefox, camera, send, add, mic,
+  filterOutline,
+  imagesSharp, folderOpenSharp,
+  locationSharp,
+  syncOutline,
+  copyOutline,
+  copy,
+  sync,
+  filter,
+  locate,
+  reorderTwo
 } from 'ionicons/icons';
 
 @Component({
@@ -57,6 +69,8 @@ import {
   styleUrls: ['./menu.page.scss'],
   standalone: true,
   imports: [
+    IonModal,
+    IonTextarea,
     IonChip,
     IonCardHeader,
     IonCardSubtitle,
@@ -107,7 +121,11 @@ export class MenuPage implements OnInit {
   nombreColeccionConversaciones: string = '';
   numeroConversacion: number = 0;
   isKeyboardOpen = false;
+  aliasConversacion: string = '';
   keyboardHeight = 0;
+  mostrarModal = false;
+  mensajeSeleccionado: any = null;
+  touchTimeout: any = null
   @ViewChild('ecoInput', { static: false }) ecoInput: any;
 
   constructor(
@@ -122,24 +140,57 @@ export class MenuPage implements OnInit {
     private firestore: Firestore,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private mapsService: MapsService
+    // private mapsService: MapsService,
+    private textToSpeechService: TextToSpeechService,
   ) {
     addIcons({
-      create, ellipsisVertical, add,
-      helpCircle, personCircle, search,
-      star, camera, send, mic, filterOutline
+      create, ellipsisVertical, add, sync, copy,
+      helpCircle, personCircle,
+      camera, send, mic, filter, logoFirefox, 
+      imagesSharp,folderOpenSharp, locate, reorderTwo
     });
 
-    Keyboard.addListener('keyboardWillShow', (info) => {
-      this.isKeyboardOpen = true;
-      this.keyboardHeight = info.keyboardHeight; // <- altura real del teclado
-    });
+      Keyboard.addListener('keyboardWillShow', (info) => {
+        this.isKeyboardOpen = true;
+        this.keyboardHeight = info.keyboardHeight; // <- altura real del teclado
+      });
 
-    Keyboard.addListener('keyboardWillHide', () => {
-    this.isKeyboardOpen = false;
-    this.keyboardHeight = 0;
-  });
+      Keyboard.addListener('keyboardWillHide', () => {
+        this.isKeyboardOpen = false;
+        this.keyboardHeight = 0;
+      });
+    }
+
+  async cargarAliasConversacion() {
+    if (!this.uid || !this.nombreColeccionConversaciones) return;
+
+    const aliasRef = doc(this.firestore, `usuarios/${this.uid}/nombres/${this.nombreColeccionConversaciones}`);
+    const aliasSnap = await getDoc(aliasRef);
+
+    if (aliasSnap.exists()) {
+      const data = aliasSnap.data();
+      this.aliasConversacion = data['alias'] || '';
+    } else {
+      // Si no existe alias, muestra el nombre de la colección como fallback
+      this.aliasConversacion = this.nombreColeccionConversaciones;
+    }
   }
+
+  async leerMensaje(texto: string) {
+    await this.textToSpeechService.speak(texto);
+  }
+
+  onTouchStart(mensaje: any) {
+    this.touchTimeout = setTimeout(() => {
+      this.mensajeSeleccionado = mensaje;
+    }, 500); // medio segundo de presión
+  }
+
+  onTouchEnd() {
+    clearTimeout(this.touchTimeout);
+  }
+
+  irLocalizaciones() { this.router.navigate(['/localizaciones']); }
 
   irHistorial() {
     this.router.navigate(['/historial']);
@@ -179,6 +230,7 @@ export class MenuPage implements OnInit {
 
     // Redireccionar a sí mismo para reiniciar el ciclo completo
     this.router.navigate(['/menu'], { queryParams: {} });
+    this.mostrarBotones = true;
   }
   
   async obtenerRespuesta() {
@@ -229,26 +281,63 @@ export class MenuPage implements OnInit {
       });
       this.mensajesAgrupadosPorFecha = this.mensajeService.agruparPorFecha(this.mensajes);
 
+        //Descomentar
       // Guardar en Firestore
-      // const userDocRef = doc(this.firestore, `usuarios/${this.uid}`);
       const conversacionesRef = collection(this.firestore, `usuarios/${this.uid}/${this.nombreColeccionConversaciones}`);
       await addDoc(conversacionesRef, {
         timestamp: fechaActual,
         mensajes: [
           { from: 'user', text: preguntaActual, date: fechaActual },
           { from: 'assistant', text: respuestaActual, date: fechaRespuesta }
-        ],
-         // fotos: {
+        ]
+        // fotos: {
         //   camara: fotoCamara,
         //   galeria: fotoGaleria,
         //   archivo: fotoArchivo
         // }
       });
 
+      // 🔽 Guardar alias solo si no existe aún
+        const aliasRef = doc(this.firestore, `usuarios/${this.uid}/nombres/${this.nombreColeccionConversaciones}`);
+        const aliasSnap = await getDoc(aliasRef);
+
+        if (!aliasSnap.exists()) {
+          await setDoc(aliasRef, {
+            alias: this.nombreColeccionConversaciones, // se usa como alias inicial
+            fecha: fechaActual
+          });
+        }
+        await this.cargarAliasConversacion();
+        this.aliasConversacionCargado = true;
+        this.mensajeService.actualizarHistorialDesdeMenu(this.nombreColeccionConversaciones, fechaActual );
+
+      // ✅ Redireccionar si la URL no tiene ?coleccion
+      const tieneColeccionEnUrl = this.route.snapshot.queryParamMap.has('coleccion');
+      if (!tieneColeccionEnUrl && this.nombreColeccionConversaciones) {
+        this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: { coleccion: this.nombreColeccionConversaciones },
+          queryParamsHandling: 'merge',
+          replaceUrl: true
+        });
+      }
+
     } finally {
       this.isLoading = false;
     }
   }
+
+async usarPregunta(pregunta: string, mensaje: any) {
+  // 1) Oculta inmediatamente los botones
+  mensaje.preguntas = null;
+
+  // 2) Asigna la pregunta al modelo del textarea
+  this.pregunta = pregunta;
+
+  // 3) Lanza la petición como si el usuario hubiera tecleado y enviado
+  await this.obtenerRespuesta();
+}
+
 
   async establecerConversacionInicialSiNoExiste() {
     const maxIntentos = 10;
@@ -308,7 +397,7 @@ export class MenuPage implements OnInit {
       this.microphoneService.stopListening();
     }
   }
-
+  // Descomentar
   async cargarConversacionesDesdeFirestore() {
     const userDocRef = doc(this.firestore, `usuarios/${this.uid}`);
     const conversacionesRef = collection(userDocRef, this.nombreColeccionConversaciones);
@@ -331,29 +420,60 @@ export class MenuPage implements OnInit {
   
     this.mensajes = mensajesTotales;
     this.mensajesAgrupadosPorFecha = this.mensajeService.agruparPorFecha(this.mensajes);
+    this.verificarInput();
   }
 
-  async ionViewWillEnter() {
+  mostrarBotones: boolean = true;
+
+  aliasConversacionCargado: boolean = false;
+
+  ionViewWillEnter() {
     this.route.queryParams.subscribe(async params => {
       const coleccion = params['coleccion'];
+      this.mostrarBotones = !coleccion;
 
       if (coleccion) {
         this.nombreColeccionConversaciones = coleccion;
+        await this.cargarAliasConversacion(); // Esto debe asignar aliasConversacion
+        this.aliasConversacionCargado = true;
+      } else {
+        this.aliasConversacion = '';
+        this.aliasConversacionCargado = true;
       }
 
       if (!this.nombreColeccionConversaciones) {
-        await this.establecerConversacionInicialSiNoExiste(); // Solo si no se asignó nada
+        await this.establecerConversacionInicialSiNoExiste();
       }
 
       this.cargarConversacionesDesdeFirestore();
     });
   }
 
-  irAlLugar() {
-    const destinoLat = -21.5375;
-    const destinoLng = -64.7296;
-    this.mapsService.abrirRuta(destinoLat, destinoLng);
+
+  // Se llama cuando se escribe algo
+  verificarInput() {
+    const hayTexto = this.pregunta.trim().length > 0;
+    const hayMensajes = this.mensajes && this.mensajes.length > 0;
+
+    // Solo mostramos los botones si no hay texto NI mensajes cargados
+    this.mostrarBotones = !hayTexto && !hayMensajes;
   }
+
+  // Se llama cuando se toca un botón rápido
+  insertarTexto(texto: string) {
+    this.pregunta += texto;
+    this.mostrarBotones = false;
+
+    Promise.resolve().then(() => {
+      this.ecoInput.setFocus();
+    });
+  }
+
+  // irAlLugar() {
+  //   const destinoLat = -21.5375;
+  //   const destinoLng = -64.7296;
+  //   this.mapsService.abrirRuta(destinoLat, destinoLng);
+  // }
 
   ionViewDidEnter() {
     setTimeout(() => {
@@ -366,6 +486,40 @@ export class MenuPage implements OnInit {
       if (user) {
         this.uid = user.uid;
       }
+    });
+  }
+
+    abrirFabYReenfocar() {
+    Promise.resolve().then(() => {
+      this.ecoInput.setFocus();
+    });
+  }
+
+  generarPreguntas(mensaje: any) {
+    const tema = this.extraerTema(mensaje.text);
+    mensaje.preguntas = [
+      `¿Qué es ${tema}?`,
+      `¿Cómo funciona ${tema}?`,
+      `Ejemplo de ${tema}`
+    ];
+
+    // Eliminar preguntas después de 10 segundos (10000 ms)
+    setTimeout(() => {
+      mensaje.preguntas = null;
+    }, 10000);
+  }
+
+  extraerTema(texto: string): string {
+    // Puedes mejorarlo, por ahora toma primeras palabras clave
+    const palabras = texto.split(' ');
+    return palabras.slice(0, 3).join(' ');
+  }
+
+  copiarAlPortapapeles(texto: string) {
+    navigator.clipboard.writeText(texto).then(() => {
+      console.log('Texto copiado al portapapeles');
+    }).catch(err => {
+      console.error('Error al copiar al portapapeles:', err);
     });
   }
 }

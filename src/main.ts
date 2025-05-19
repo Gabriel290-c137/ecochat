@@ -6,9 +6,18 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from './environments/environment';
 import { provideHttpClient } from '@angular/common/http';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { Capacitor } from '@capacitor/core';
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
+
+// ✅ Inicializa el plugin GoogleAuth ANTES de arrancar la app
+GoogleAuth.initialize({
+  clientId: Capacitor.isNativePlatform() ? environment.androidClientId : environment.googleWebClientId,
+  scopes: ['profile', 'email'],
+  grantOfflineAccess: true,
+});
 
 bootstrapApplication(AppComponent, {
   providers: [

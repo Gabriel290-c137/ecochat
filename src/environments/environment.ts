@@ -5,14 +5,16 @@
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: "AIzaSyCjp6UteH_heVr_WFbFF8JCTwELueLj2II",
-    authDomain: "ecochat-5ab68.firebaseapp.com",
-    projectId: "ecochat-5ab68",
-    storageBucket: "ecochat-5ab68.firebasestorage.app",
-    messagingSenderId: "75493471794",
-    appId: "1:75493471794:web:a4819ef13b42e7c445ee2b"
+    apiKey: "AIzaSyDE_Cg-rvw0SorPEe_BaRcff7WeDPcwPeY",
+    authDomain: "ecochat-41e35.firebaseapp.com",
+    projectId: "ecochat-41e35",
+    storageBucket: "ecochat-41e35.firebasestorage.app",
+    messagingSenderId: "213178519857",
+    appId: "1:213178519857:web:d69c0223e245a0d4122010"
   },
-  geminiApiKey: "AIzaSyD6kwJcaHyXArWuM_RF824Nbl39TO4yePo"
+  geminiApiKey: "AIzaSyD6kwJcaHyXArWuM_RF824Nbl39TO4yePo",
+  googleWebClientId: "213178519857-cj2o8phkkq3vohh1kcmoe49f5lpkvr38.apps.googleusercontent.com",
+  androidClientId: "213178519857-cj2o8phkkq3vohh1kcmoe49f5lpkvr38.apps.googleusercontent.com"
 };
 
 /*
