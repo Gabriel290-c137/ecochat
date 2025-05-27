@@ -13,7 +13,7 @@ import {
   IonList,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { personCircle, personCircleOutline, sunny, sunnyOutline } from 'ionicons/icons';
+import { personCircle, personCircleOutline, sunny, sunnyOutline, chevronForward } from 'ionicons/icons';
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthgoogleService } from 'src/app/services/authgoogle.service';
 import { Router } from '@angular/router';
@@ -42,7 +42,7 @@ export class ConfiguracionPage implements OnInit {
   nombre: string = '';
 
   constructor(private authService: AuthService, private authGoogle: AuthgoogleService, private router: Router) {
-    addIcons({ personCircle, personCircleOutline, sunny, sunnyOutline });
+    addIcons({personCircle,chevronForward,personCircleOutline,sunny,sunnyOutline});
   }
 
     ngOnInit() {

@@ -1,17 +1,23 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthgoogleService } from '../../services/authgoogle.service';
 import { 
   IonHeader,
+  IonBackButton,
+  IonToolbar,
+  IonButtons,
   IonContent, 
   IonButton, 
   IonCard, 
   IonItem, 
-  IonInput 
+  IonInput,
+  IonIcon
 } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { logoGoogle, person, lockClosed, personAdd, people, key } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
+import { Keyboard } from '@capacitor/keyboard';
 
 @Component({
   selector: 'app-registro',
@@ -20,12 +26,16 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [
     IonHeader,
+    IonButtons,
+    IonToolbar,
+    IonBackButton,
     IonContent, 
     IonButton, 
     IonCard, 
     IonItem, 
     IonInput, 
-    CommonModule, 
+    CommonModule,
+    IonIcon,
     FormsModule
   ]
 })
@@ -33,8 +43,18 @@ import { AuthService } from '../../services/auth.service';
 export class RegistroPage {
   email = '';
   password = '';
+  tecladoAbierto = false;
 
-  constructor(private router: Router, private authService: AuthService, private authGoogleService: AuthgoogleService) {}
+  constructor(private router: Router, private authService: AuthService, ) 
+  {addIcons({logoGoogle, person, lockClosed, personAdd, people, key})
+    Keyboard.addListener('keyboardWillShow', () => {
+        this.tecladoAbierto = true;
+      });
+
+      Keyboard.addListener('keyboardWillHide', () => {
+        this.tecladoAbierto = false;
+      });
+  }
 
   registrar() {
     this.authService.register(this.email, this.password)

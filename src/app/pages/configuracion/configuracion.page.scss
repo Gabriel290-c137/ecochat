@@ -1,0 +1,179 @@
+:host {
+  html, body, ion-app, ion-router-outlet, ion-page, ion-content {
+    height: 100%;
+  }
+
+  /* 2. Degradado en el wrapper de la app */
+  ion-app {
+    background: linear-gradient(--background-darkz) !important;
+  }
+
+  /* 3. Header y footer transparentes */
+  ion-header,
+  ion-list,
+  ion-toolbar{
+    --background: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    z-index: 10;
+  }
+
+  /* 4. ion-content sin padding de fondo */
+  ion-content {
+    --background: transparent;
+    background: transparent !important;
+  }
+}
+
+  ion-title {
+    font-size: 18px;
+    font-weight: 400;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+ion-content {
+  --background: #0f111a;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.contenedor-configuracion {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; // Espacio uniforme entre secciones
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 400;
+
+  .user-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+
+    ion-icon {
+      font-size: 60px;
+    }
+  }
+
+  .user-details {
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    p {
+      color: #666;
+      margin: 0;
+    }
+  }
+}
+
+.donacion-fondo {
+  background: url('/assets/icon/wallpaper.png') center/cover no-repeat;
+  padding: 24px;
+  border-radius: 20px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.donacion-icon {
+  font-size: 48px;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.donacion-contenido {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.donacion-contenido h3 {
+  margin: 0 0 16px 0;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.donacion-button {
+  --background: rgba(255, 255, 255, 0.20);
+  --border-radius: 32px;
+  --color: white;
+  width: 100%;
+  max-width: 280px;
+  height: 45px;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+  text-transform: none;
+}
+
+.donacion-button:hover {
+  transform: scale(1.02);
+}
+
+.lista-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.opcion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+
+  ion-icon {
+    font-size: 18px;
+    color: white;
+  }
+}
+
+.cerrar-sesion {
+  background-color: #124a35;
+  color: #aee5d4;
+  text-align: center;
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: light) {
+  .cerrar-sesion {
+    background-color:#c8f2b8 !important;
+    color: #124a35 !important;
+  }
+}

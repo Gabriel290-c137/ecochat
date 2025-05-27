@@ -10,11 +10,13 @@ import { FileUploadService } from '../../services/fileupload.service';
 import { MicrophoneService } from '../../services/microphone.service';
 import { MensajeService } from '../../services/mensaje.service';
 import { AuthService } from '../../services/auth.service';
+import { AuthgoogleService } from '../../services/authgoogle.service';
 import { Firestore, collection, addDoc, doc, getDocs, query, orderBy, limit, setDoc, getDoc} from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 // import { MapsService } from '../../services/maps.service';
 import { Keyboard } from '@capacitor/keyboard';
 import { TextToSpeechService } from '../../services/texttospeech.service';
+import { Platform } from '@ionic/angular';
 import { ViewChild } from '@angular/core';
 
 import { 
@@ -60,7 +62,8 @@ import {
   sync,
   filter,
   locate,
-  reorderTwo
+  reorderTwo,
+  createOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -107,6 +110,9 @@ export class MenuPage implements OnInit {
   respuesta: string = '';
   isLoading: boolean = false;
   fechaActual: Date = new Date();
+  isFocused: boolean = false;
+  nombre: string = '';
+  correo: string = '';
 
   mensajes: Array<{
     from: 'user' | 'assistant',
@@ -142,9 +148,11 @@ export class MenuPage implements OnInit {
     private route: ActivatedRoute,
     // private mapsService: MapsService,
     private textToSpeechService: TextToSpeechService,
+    private authGoogle: AuthgoogleService,
+    private platform: Platform
   ) {
     addIcons({
-      create, ellipsisVertical, add, sync, copy,
+      createOutline, ellipsisVertical, add, sync, copy,
       helpCircle, personCircle,
       camera, send, mic, filter, logoFirefox, 
       imagesSharp,folderOpenSharp, locate, reorderTwo
@@ -192,6 +200,12 @@ export class MenuPage implements OnInit {
 
   irLocalizaciones() { this.router.navigate(['/localizaciones']); }
 
+    generarNombreDesdeCorreo(correo: string): string {
+      const parteLocal = correo.split('@')[0];
+      const partes = parteLocal.split('.');
+      return partes.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' ');
+    }
+
   irHistorial() {
     this.router.navigate(['/historial']);
   }
@@ -223,6 +237,9 @@ export class MenuPage implements OnInit {
   nuevaConversacion() {
     this.mensajes = [];
     this.mensajesAgrupadosPorFecha = [];
+    this.photoService.photos = [];
+    this.uploadService.upload = [];
+    this.fileUploadService.files = [];
     this.pregunta = '';
     this.respuesta = '';
     this.nombreColeccionConversaciones = '';
@@ -230,7 +247,15 @@ export class MenuPage implements OnInit {
 
     // Redireccionar a sí mismo para reiniciar el ciclo completo
     this.router.navigate(['/menu'], { queryParams: {} });
-    this.mostrarBotones = true;
+    this.mostrarEnPantalla = true;
+  }
+
+  hayImagenes(): boolean {
+    return (
+      this.photoService.photos.length > 0 ||
+      this.uploadService.upload.length > 0 ||
+      this.fileUploadService.files.length > 0
+    );
   }
   
   async obtenerRespuesta() {
@@ -307,6 +332,10 @@ export class MenuPage implements OnInit {
             fecha: fechaActual
           });
         }
+        this.photoService.photos = [];
+        this.uploadService.upload = [];
+        this.fileUploadService.files = [];
+
         await this.cargarAliasConversacion();
         this.aliasConversacionCargado = true;
         this.mensajeService.actualizarHistorialDesdeMenu(this.nombreColeccionConversaciones, fechaActual );
@@ -338,13 +367,12 @@ async usarPregunta(pregunta: string, mensaje: any) {
   await this.obtenerRespuesta();
 }
 
-
   async establecerConversacionInicialSiNoExiste() {
     const maxIntentos = 10;
     const resultados: number[] = [];
 
     for (let i = 1; i <= maxIntentos; i++) {
-      const nombre = i === 1 ? 'conversaciones' : `conversaciones${i}`;
+      const nombre = i === 1 ? 'Conversacion' : `Conversacion${i}`;
       const ref = collection(this.firestore, `usuarios/${this.uid}/${nombre}`);
       const q = query(ref, orderBy('timestamp', 'desc'), limit(1));
 
@@ -359,7 +387,7 @@ async usarPregunta(pregunta: string, mensaje: any) {
     const ultimo = resultados.length > 0 ? Math.max(...resultados) : 0;
     this.numeroConversacion = ultimo + 1;
     this.nombreColeccionConversaciones =
-      this.numeroConversacion === 1 ? 'conversaciones' : `conversaciones${this.numeroConversacion}`;
+      this.numeroConversacion === 1 ? 'Conversacion' : `Conversacion${this.numeroConversacion}`;
   }
 
   enviar() {
@@ -423,22 +451,29 @@ async usarPregunta(pregunta: string, mensaje: any) {
     this.verificarInput();
   }
 
-  mostrarBotones: boolean = true;
+  mostrarEnPantalla: boolean = true;
 
   aliasConversacionCargado: boolean = false;
 
   ionViewWillEnter() {
     this.route.queryParams.subscribe(async params => {
       const coleccion = params['coleccion'];
-      this.mostrarBotones = !coleccion;
+      this.mostrarEnPantalla = !coleccion;
 
       if (coleccion) {
         this.nombreColeccionConversaciones = coleccion;
-        await this.cargarAliasConversacion(); // Esto debe asignar aliasConversacion
+        await this.cargarAliasConversacion();
         this.aliasConversacionCargado = true;
       } else {
         this.aliasConversacion = '';
         this.aliasConversacionCargado = true;
+      }
+
+      // ✅ Si no es la conversación principal, limpia las imágenes
+      if (!this.mostrarEnPantalla) {
+        this.photoService.photos = [];
+        this.uploadService.upload = [];
+        this.fileUploadService.files = [];
       }
 
       if (!this.nombreColeccionConversaciones) {
@@ -449,20 +484,45 @@ async usarPregunta(pregunta: string, mensaje: any) {
     });
   }
 
-
   // Se llama cuando se escribe algo
-  verificarInput() {
-    const hayTexto = this.pregunta.trim().length > 0;
-    const hayMensajes = this.mensajes && this.mensajes.length > 0;
+verificarInput() {
+  const hayTexto = this.pregunta.trim().length > 0;
+  const hayMensajes = this.mensajes && this.mensajes.length > 0;
 
-    // Solo mostramos los botones si no hay texto NI mensajes cargados
-    this.mostrarBotones = !hayTexto && !hayMensajes;
-  }
+  this.mostrarEnPantalla = !hayTexto && !hayMensajes;
+
+  setTimeout(() => {
+    if (this.ecoInput?.getInputElement) {
+      this.ecoInput.getInputElement().then((textarea: HTMLTextAreaElement) => {
+        textarea.style.height = 'auto';
+
+        const lineHeight = 24; // igual a line-height en CSS
+        const padding = 16;
+        const maxHeight = lineHeight * 4 + padding;
+        const scrollHeight = textarea.scrollHeight;
+
+        if (scrollHeight <= maxHeight) {
+          textarea.style.height = scrollHeight + 'px';
+          textarea.scrollTop = 0;
+        } else {
+          textarea.style.height = maxHeight + 'px';
+          
+          // 🧠 Alineamos el scroll al comienzo de la 5ta línea
+          const scrollTo = scrollHeight - maxHeight;
+
+          // Opcional: redondeamos al múltiplo de lineHeight para evitar media línea
+          const offset = Math.ceil(scrollTo / lineHeight) * lineHeight;
+          textarea.scrollTop = offset;
+        }
+      });
+    }
+  }, 10);
+}
 
   // Se llama cuando se toca un botón rápido
   insertarTexto(texto: string) {
     this.pregunta += texto;
-    this.mostrarBotones = false;
+    this.mostrarEnPantalla = false;
 
     Promise.resolve().then(() => {
       this.ecoInput.setFocus();
@@ -479,14 +539,6 @@ async usarPregunta(pregunta: string, mensaje: any) {
     setTimeout(() => {
       this.ecoInput.setFocus();
     }, 500);
-  }
-
-  ngOnInit() {
-    this.authService.userReady.subscribe(user => {
-      if (user) {
-        this.uid = user.uid;
-      }
-    });
   }
 
     abrirFabYReenfocar() {
@@ -521,5 +573,31 @@ async usarPregunta(pregunta: string, mensaje: any) {
     }).catch(err => {
       console.error('Error al copiar al portapapeles:', err);
     });
+  }
+
+    activarTextarea() {
+    if (this.platform.is('capacitor')) {
+      this.isKeyboardOpen = true;
+
+      setTimeout(() => {
+        const input = document.querySelector('ion-textarea');
+        (input as any)?.setFocus?.(); // intenta enfocar si es compatible
+      }, 100);
+    }
+  }
+
+    ngOnInit() {
+    this.authService.userReady.subscribe(user => {
+      if (user) {
+        this.uid = user.uid;
+      }
+    });
+
+    const user = this.authService.getUsuario() || this.authGoogle.getUsuario();
+    if (user) {
+      this.correo = user.email || '';
+      const nombreCompleto = user.displayName || this.generarNombreDesdeCorreo(user.email || '');
+      this.nombre = nombreCompleto.split(' ')[0];
+    }
   }
 }

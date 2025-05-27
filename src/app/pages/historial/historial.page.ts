@@ -24,7 +24,7 @@ import {
 } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
-import { close, person, personCircle } from 'ionicons/icons';
+import { close, openOutline, person, personCircle, trashOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-historial',
@@ -71,7 +71,7 @@ export class HistorialPage {
   private authService = inject(AuthService);
 
   constructor(private router: Router, private mensajeService: MensajeService) {
-    addIcons({ close, person, personCircle });
+    addIcons({ close, person, personCircle, trashOutline, openOutline});
 
     const uid = this.authService.getUID();
     if (uid) {
@@ -101,7 +101,7 @@ export class HistorialPage {
       const promesas = [];
 
       for (let i = inicio; i <= fin; i++) {
-        const nombre = i === 1 ? 'conversaciones' : `conversaciones${i}`;
+        const nombre = i === 1 ? 'Conversacion' : `Conversacion${i}`;
         const ref = collection(this.firestore, `usuarios/${uid}/${nombre}`);
         const q = query(ref, orderBy('timestamp', 'desc'));
 
@@ -204,7 +204,7 @@ export class HistorialPage {
     docsSnap1.forEach(doc => batch.delete(doc.ref));
 
     // 2. Eliminar documentos en: usuarios/{uid}/nombres/{nombre}/conversaciones
-    const ref2 = collection(this.firestore, `usuarios/${uid}/nombres/${nombre}/conversaciones`);
+    const ref2 = collection(this.firestore, `usuarios/${uid}/nombres/${nombre}/Conversacion`);
     const docsSnap2 = await getDocs(ref2);
     docsSnap2.forEach(doc => batch.delete(doc.ref));
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {
   IonContent,
+  IonBackButton,
+  IonButtons,
   IonHeader,
   IonTitle,
   IonToolbar,
@@ -27,6 +29,8 @@ import { AuthgoogleService } from 'src/app/services/authgoogle.service';
   standalone: true,
   imports: [
     IonContent,
+    IonBackButton,
+    IonButtons,
     IonHeader,
     IonTitle,
     IonToolbar,

@@ -58,14 +58,18 @@ export class MensajeService {
     const fechaComparacion = new Date(fechaObj);
     fechaComparacion.setHours(0, 0, 0, 0);
 
-    return fechaComparacion.getTime() === hoy.getTime()
-      ? 'Hoy'
-      : fechaObj.toLocaleDateString('es-ES', {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        });
+    if (fechaComparacion.getTime() === hoy.getTime()) {
+      return 'Hoy';
+    }
+
+    const fechaFormateada = fechaObj.toLocaleDateString('es-ES', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    return fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1);
   }
 
   actualizarHistorialDesdeMenu(nombreColeccion: string, fecha: Date | Timestamp) {

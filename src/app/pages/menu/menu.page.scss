@@ -1,0 +1,390 @@
+:host {
+  html, body, ion-app, ion-router-outlet, ion-page, ion-content {
+    height: 100%;
+  }
+
+  /* 2. Degradado en el wrapper de la app */
+  ion-app {
+    background: linear-gradient(--background-darkz) !important;
+  }
+
+  /* 3. Header y footer transparentes */
+  ion-header,
+  ion-toolbar,
+  ion-footer {
+    --background: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    z-index: 10;
+  }
+
+  /* 4. ion-content sin padding de fondo */
+  ion-content {
+    --background: transparent;
+    background: transparent !important;
+  }
+}
+
+::ng-deep ion-textarea.eco-input textarea {
+  font-size: 1rem;
+  line-height: 1.7rem; /* 24px */
+  padding-top: 0.6rem;
+  padding-bottom: 0.5rem;
+  overflow-y: auto;
+  resize: none;
+  box-sizing: border-box;
+  max-height: calc(1.5rem * 4 + 1rem); /* 4 líneas + padding */
+  scrollbar-width: none;
+}
+
+::ng-deep ion-textarea.eco-input textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-toolbar {
+  --background: transparent;
+  ion-title {
+    font-size: 18px;
+    font-weight: 400;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  &::after {
+    background: none !important;
+    box-shadow: none !important;
+    height: 0 !important;
+  }
+  
+  .boton-grande {
+    transform: scale(1.5);
+
+    ion-icon {
+      font-size: 26px;
+    }
+  }
+
+  .boton-nueva-conversacion {
+    transform: scale(1.2);
+    margin-left: 8px;
+
+    ion-icon {
+      font-size: 26px;
+    }
+  }
+}
+
+.saludo h1 {
+  font-size: 2rem;
+}
+
+.page-login {
+  .grupo-mensajes {
+    margin-top: 20px;
+  }
+
+  .fecha-grupo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 12px;
+  font-size: 11px;
+  color: #a0a0a0;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #444; // puedes ajustarlo si usas otro fondo
+    margin: 0 12px;
+  }
+}
+
+  .mensaje {
+    margin-bottom: 10px;
+
+    &.usuario {
+      text-align: right;
+
+      .chip-usuario {
+        background-color: #124a35;
+        padding: 10px 16px;
+        border-radius: 18px;
+        display: inline-block;
+        max-width: 75%;
+        font-size: 16px;
+        line-height: 1.7;
+        word-wrap: break-word;   
+        white-space: pre-wrap;     
+        overflow-wrap: break-word; 
+        text-align: left;        
+      }
+
+      .imagenes-usuario {
+        margin-top: 10px;
+
+        ion-img {
+          max-width: 100%;
+          max-height: 200px;
+          display: block;
+          margin-bottom: 5px;
+        }
+      }
+    }
+
+    &.assistant {
+      text-align: left;
+      margin-bottom: 20px;
+
+      .botones-accion {
+        margin-top: 10px;
+        display: flex;
+        gap: 8px;
+      }
+
+      .botones-preguntas {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        ion-button {
+          text-transform: none;
+          white-space: nowrap;
+          padding: 2px 10px;
+          border-radius: 10px;
+          margin-right: 8px;
+          background-color: #124a35;
+          border: none;
+          font-size: 14px;
+          line-height: 1;
+          flex: 0 0 auto;
+
+          --color: #aee5d4;           
+          --background: #124a35;
+          --border-radius: 16px;
+          --box-shadow: none;
+          --border: none;
+        }
+      }
+    }
+  }
+}
+
+
+//Botones de Sugerencias
+
+.sugerencias-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  padding: 12px;
+  bottom: 135px;
+  z-index: 1000;
+  transition: bottom 0.3s;
+
+  &.keyboard-open {
+    bottom: 140px;
+  }
+
+  .sugerencias-scroll {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    padding: 0 12px;
+    scroll-behavior: smooth;
+
+    .sugerencia-btn,
+    ion-button {
+      text-transform: none;
+      white-space: nowrap;
+      padding: 2px 10px;
+      margin-right: 8px;
+      background-color: #124a35;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1;
+      flex: 0 0 auto;
+
+      --color: #aee5d4;           
+      --background: #124a35;
+      --border-radius: 10px;
+      --box-shadow: none;
+      --border: none;
+    }
+
+    ion-button::part(native) {
+      color: #aee5d4 !important;
+    }
+
+    .sugerencia-btn {
+      color: #aee5d4 !important;
+    }
+  }
+}
+
+//footer
+
+.footer-ecochat {
+  padding: 1rem;
+  transition: padding 0.3s ease;
+
+  .ecochat-box {
+    background: #06241F;
+    border: 3px solid #1F4D43;
+    border-radius: 1rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-bottom 0.3s ease, border-radius 0.3s ease;
+  }
+
+  &.keyboard-open {
+    padding: 0;
+
+    .ecochat-box {
+      border-bottom: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      max-height: 11rem; // limite razonable total si quieres
+      overflow: hidden;  // evita que el contenido rompa el layout
+    }
+  }
+
+  .eco-input {
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    color: var(--ion-color-darkz);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.5rem;
+
+    --padding-start: 0;
+    --padding-end: 0;
+    --highlight-color: var(--ion-color-darkz);    
+  }
+
+  .eco-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .eco-left,
+    .eco-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    ion-button {
+      --color: var(--ion-color-darkz);
+      font-size: 0.9rem;
+    }
+
+    ion-icon {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+  .custom-fab {
+  margin-right: 120px;
+  transition: margin-bottom 0.3s;
+  z-index: 2000;
+
+  ion-fab-list {
+    z-index: 2000;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .footer-ecochat {
+    .ecochat-box {
+      background: #ffffff;
+      border: 3px solid #c8f2b8;
+      border-radius: 1rem;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: border-bottom 0.3s ease, border-radius 0.3s ease;
+    }
+  }
+
+    .mensaje.usuario .chip-usuario {
+      background-color: #d9fadd !important;
+      color: #000000 !important;
+    }
+
+      .botones-preguntas ion-button {
+      --background: #d9fadd  !important;
+      --color: #000000 !important;
+      --box-shadow: none !important;
+      --border: none !important;
+      --border-radius: 16px !important;
+
+      // Este es el más importante para evitar bordes verdes
+      background-color: #d9fadd  !important;
+    }
+
+    .botones-preguntas ion-button::part(native) {
+      background-color: #d9fadd  !important;
+      color: #000000 !important;
+      border-radius: 16px !important;
+      box-shadow: none !important;
+    }
+
+    .botones-preguntas ion-button::part(container) {
+      background-color: #d9fadd  !important;
+      box-shadow: none !important;
+    }
+
+  .sugerencias-container {
+    .sugerencias-scroll {
+      .sugerencia-btn,
+      ion-button {
+        background-color: #ffffff;      /* fondo blanco */
+        border-radius: 10px;
+        text-transform: none;
+        white-space: nowrap;
+        padding: 2px 10px;
+        margin-right: 8px;
+        font-size: 14px;
+        line-height: 1;
+        flex: 0 0 auto;
+
+        --background: #ffffff;
+        --color: #000000;
+        --border: 2px solid transparent;
+        --border-radius: 10px;
+        --box-shadow: none;
+      }
+
+      ion-button::part(native) {
+        color: #000000 !important;
+      }
+
+      .sugerencia-btn {
+        color: #000000 !important;
+      }
+    }
+  }
+}
+

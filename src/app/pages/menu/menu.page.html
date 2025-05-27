@@ -1,245 +1,220 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar class="custom-toolbar">
     <!-- Botón de menú a la izquierda -->
-    <ion-buttons slot="start">
-      <ion-button (click)="irHistorial()">
+    <ion-buttons slot="start"> 
+      <ion-button class="boton-grande" (click)="irHistorial()">
         <ion-icon slot="icon-only" name="reorder-two"></ion-icon>
       </ion-button>
     </ion-buttons>
 
-    <ion-title class="ion-text-center">
-      {{ aliasConversacionCargado ? (aliasConversacion || 'Nueva Conversación') : 'Nueva Conversación' }}
-    </ion-title>
+    <ion-title>{{ aliasConversacionCargado ? (aliasConversacion || 'Nueva Conversación') : 'Nueva Conversación' }}</ion-title>
 
     <!-- Botón de editar a la derecha -->
     <ion-buttons slot="primary">
-      <ion-button (click)="nuevaConversacion()">
-        <ion-icon slot="icon-only" name="create"></ion-icon>
+      <ion-button class="boton-nueva-conversacion" (click)="nuevaConversacion()">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <!-- Saludo inicial -->
+  <div *ngIf="mostrarEnPantalla" class="saludo">
+    <h1>Hola {{ nombre }}, como te puedo ayudar hoy</h1>
+  </div>
+
+  <!-- Conversaciones agrupadas por fecha -->
   <div class="page-login">
-
-    <!-- Galería de fotos (Cámara) -->
-    <ion-grid>
-      <ion-row>
-        <ion-col size="5" *ngFor="let photo of photoService.photos">
-          <ion-img [src]="photo.webviewPath"></ion-img>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <!-- Galería de fotos (Galería) -->
-    <ion-grid>
-      <ion-row>
-        <ion-col size="5" *ngFor="let photo of uploadService.upload">
-          <ion-img [src]="photo.webviewPath"></ion-img>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <!-- Galería de archivos -->
-    <ion-grid>
-      <ion-row>
-        <ion-col size="5" *ngFor="let file of fileUploadService.files">
-          <ion-img [src]="file.webviewPath"></ion-img>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <!-- Conversaciones agrupadas por fecha -->
-    <div *ngFor="let grupo of mensajesAgrupadosPorFecha; let i = index" style="margin-top: 20px;">
+    <div *ngFor="let grupo of mensajesAgrupadosPorFecha; let i = index" class="grupo-mensajes">
 
       <!-- Mostrar fecha ya formateada -->
-      <div style="text-align: center; font-size: 12px; color: gray; margin-bottom: 10px;"
-           *ngIf="grupo.mensajes.length > 0">
+      <div *ngIf="grupo.mensajes.length > 0" class="fecha-grupo">
         {{ grupo.fecha }}
       </div>
 
       <!-- Mensajes del grupo -->
       <div *ngFor="let mensaje of grupo.mensajes">
-        
+
         <!-- Usuario -->
-        <div *ngIf="mensaje.from === 'user'" style="text-align: right; margin-bottom: 10px;" (touchstart)="onTouchStart(mensaje)" (touchend)="onTouchEnd()">
-          <ion-chip style="background-color: #e0e0e0; color: #000000; padding: 8px;">
+        <div *ngIf="mensaje.from === 'user'" class="mensaje usuario" (touchstart)="onTouchStart(mensaje)" (touchend)="onTouchEnd()">
+          <ion-chip class="chip-usuario">
             <ion-label>{{ mensaje.text }}</ion-label>
           </ion-chip>
 
           <!-- Imágenes del usuario -->
-          <div style="margin-top: 10px;" *ngIf="mensaje.fotos">
-            <ion-img *ngIf="mensaje.fotos.camara" [src]="mensaje.fotos.camara.startsWith('data:') ? mensaje.fotos.camara : 'data:image/jpeg;base64,' + mensaje.fotos.camara" style="max-width: 100%; max-height: 200px;"></ion-img>
-            <ion-img *ngIf="mensaje.fotos.galeria" [src]="mensaje.fotos.galeria.startsWith('data:') ? mensaje.fotos.galeria : 'data:image/jpeg;base64,' + mensaje.fotos.galeria" style="max-width: 100%; max-height: 200px;"></ion-img>
-            <ion-img *ngIf="mensaje.fotos.archivo" [src]="mensaje.fotos.archivo.startsWith('data:') ? mensaje.fotos.archivo : 'data:image/jpeg;base64,' + mensaje.fotos.archivo" style="max-width: 100%; max-height: 200px;"></ion-img>
+          <div *ngIf="mensaje.fotos" class="imagenes-usuario">
+            <ion-img *ngIf="mensaje.fotos.camara" [src]="mensaje.fotos.camara.startsWith('data:') ? mensaje.fotos.camara : 'data:image/jpeg;base64,' + mensaje.fotos.camara"></ion-img>
+            <ion-img *ngIf="mensaje.fotos.galeria" [src]="mensaje.fotos.galeria.startsWith('data:') ? mensaje.fotos.galeria : 'data:image/jpeg;base64,' + mensaje.fotos.galeria"></ion-img>
+            <ion-img *ngIf="mensaje.fotos.archivo" [src]="mensaje.fotos.archivo.startsWith('data:') ? mensaje.fotos.archivo : 'data:image/jpeg;base64,' + mensaje.fotos.archivo"></ion-img>
           </div>
         </div>
+
         <!-- Asistente -->
-        <div *ngIf="mensaje.from === 'assistant'" style="text-align: left; margin-bottom: 20px; color: white;" (touchstart)="onTouchStart(mensaje)"(touchend)="onTouchEnd()">
+        <div *ngIf="mensaje.from === 'assistant'" class="mensaje assistant" (touchstart)="onTouchStart(mensaje)" (touchend)="onTouchEnd()">
           {{ mensaje.text }}
 
           <!-- Botones de acción -->
-          <div style="margin-top: 10px; display: flex; gap: 8px;">
+          <div class="botones-accion">
             <ion-button size="small" fill="clear" color="dark" (click)="generarPreguntas(mensaje)">
               <ion-icon slot="icon-only" name="sync"></ion-icon>
             </ion-button>
-            <ion-button
-            size="small"
-            fill="clear"
-            color="dark"
-            (click)="copiarAlPortapapeles(mensaje.text); abrirFabYReenfocar()">
-            <ion-icon slot="icon-only" name="copy"></ion-icon>
-          </ion-button>
+            <ion-button size="small" fill="clear" color="dark" (click)="copiarAlPortapapeles(mensaje.text); abrirFabYReenfocar()">
+              <ion-icon slot="icon-only" name="copy"></ion-icon>
+            </ion-button>
           </div>
 
           <!-- Botones generados de preguntas -->
-          <div *ngIf="mensaje.preguntas && !pregunta"
-              style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;">
-            <ion-button *ngFor="let pregunta of mensaje.preguntas"
-                        size="small" fill="outline" color="medium"
-                        (click)="usarPregunta(pregunta, mensaje)">
+          <div *ngIf="mensaje.preguntas && !pregunta" class="botones-preguntas">
+            <ion-button *ngFor="let pregunta of mensaje.preguntas" size="small" fill="clear" (click)="usarPregunta(pregunta, mensaje)">
               {{ pregunta }}
             </ion-button>
           </div>
         </div>
       </div>
     </div>
+
+<ion-grid 
+  *ngIf="photoService.photos.length || uploadService.upload.length || fileUploadService.files.length"
+  style="display: flex; justify-content: flex-end; padding: 0;">
+  
+  <ion-row style="justify-content: flex-end; flex-wrap: wrap; width: auto;">
+
+    <!-- Fotos de cámara -->
+    <ion-col size="6" sizeMd="4" sizeLg="3" *ngFor="let photo of photoService.photos" style="display: flex; justify-content: flex-end;">
+      <ion-img 
+        [src]="photo.webviewPath" 
+        class="img-galeria"
+        style="max-width: 100%; max-height: 200px; border-radius: 16px; object-fit: cover; padding: 4px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); background: transparent;">
+      </ion-img>
+    </ion-col>
+
+    <!-- Fotos subidas -->
+    <ion-col size="6" sizeMd="4" sizeLg="3" *ngFor="let photo of uploadService.upload" style="display: flex; justify-content: flex-end;">
+      <ion-img 
+        [src]="photo.webviewPath" 
+        class="img-galeria"
+        style="max-width: 100%; max-height: 200px; border-radius: 16px; object-fit: cover; padding: 4px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); background: transparent;">
+      </ion-img>
+    </ion-col>
+
+    <!-- Archivos cargados -->
+    <ion-col size="6" sizeMd="4" sizeLg="3" *ngFor="let file of fileUploadService.files" style="display: flex; justify-content: flex-end;">
+      <ion-img 
+        [src]="file.webviewPath" 
+        class="img-galeria"
+        style="max-width: 100%; max-height: 200px; border-radius: 16px; object-fit: cover; padding: 4px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); background: transparent;">
+      </ion-img>
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+
   </div>
 </ion-content>
 
 <!-- Botones sugerencia flotantes encima del ion-footer -->
 <div
-  *ngIf="mostrarBotones"
-  [style.bottom.px]="isKeyboardOpen ? 115 : 115"
-  style="position: fixed; left: 0; right: 0; padding: 8px; background: transparent; z-index: 1000; transition: bottom 0.3s;">
+  *ngIf="mostrarEnPantalla"
+  [class.keyboard-open]="isKeyboardOpen"
+  class="sugerencias-container">
   
-  <div
-    style="display: flex; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; padding: 0 12px;">
-    
-    <ion-button color="dark" fill="outline" style="text-transform: none; margin-right: 8px; white-space: nowrap;"
+  <div class="sugerencias-scroll">
+    <ion-button
+      color="dark"
+      fill="clear"
+      class="sugerencia-btn"
       (click)="insertarTexto('¿Qué puedo hacer en mi día a día para reducir mi huella de carbono?')">
-      ¿Qué puedo hacer en mi día a día para reducir mi huella de carbono?
+      Reducir mi huella de carbono
     </ion-button>
 
-    <ion-button color="dark" fill="outline" style="text-transform: none; margin-right: 8px; white-space: nowrap;"
+    <ion-button
+      color="dark"
+      fill="clear"
+      class="sugerencia-btn"
       (click)="insertarTexto('¿Cómo afecta la contaminación plástica a los océanos y la vida marina?')">
-      ¿Cómo afecta la contaminación plástica a los océanos y la vida marina?
+      Océanos y plástico impacto
     </ion-button>
 
-    <ion-button color="dark" fill="outline" style="text-transform: none; white-space: nowrap;"
+    <ion-button
+      color="dark"
+      fill="clear"
+      class="sugerencia-btn"
       (click)="insertarTexto('¿Qué energías renovables son las más eficientes hoy en día?')">
-      ¿Qué energías renovables son las más eficientes hoy en día?
+      Energías Renovables
     </ion-button>
-
   </div>
 </div>
 
-<ion-footer>
-  <!-- Input de texto -->
-  <ion-toolbar>
-    <ion-item lines="none" style="flex: 1;">
-      <ion-textarea
-        #ecoInput
-        placeholder="Enviar mensaje a EcoChat"
-        [(ngModel)]="pregunta"
-        (ionInput)="verificarInput()"
-        (keyup.enter)="obtenerRespuesta()"
-        autoGrow="true"
-        [rows]="1"
-        [style.max-height]="isKeyboardOpen ? '6.4em' : '1.6em'"
-        style="overflow-y: auto;">
-      </ion-textarea>
-    </ion-item>
-  </ion-toolbar>
 
-  <ion-toolbar>  
-    <!-- Botones a la izquierda -->
-    <ion-buttons slot="start">
-      <!-- Botón redondo con ícono -->
-      <ion-button shape="round" size="small" color="dark" (click)="irHome()">
-        <ion-icon slot="icon-only" name="logo-firefox"></ion-icon>
-      </ion-button>
-      <!-- Botón rectangular con texto -->
-      <ion-button shape="round" size="default" color="dark" (click)="mostrarModal = true">
-        donaciones
-      </ion-button>
-    </ion-buttons>
+<ion-footer [ngClass]="{'keyboard-open': isKeyboardOpen}" class="footer-ecochat">
+  <div class="ecochat-box">
 
-    <ion-modal 
-      [isOpen]="mostrarModal" 
-      (didDismiss)="mostrarModal = false"
-      class="modal-opciones"
-      initialBreakpoint="0.25"        
-    >
-      <ng-template>
-        <ion-content class="ion-padding">
-          <!-- Adorno tipo handle -->
-          <div 
-            style="
-              width: 40px;
-              height: 4px;
-              background-color: #ccc;
-              border-radius: 2px;
-              margin: 8px auto 16px auto;
-            ">
-          </div>
-          <ion-button expand="block" fill="outline" color="dark">+10 tokens</ion-button>
-          <ion-button expand="block" fill="outline" color="dark">+20 tokens</ion-button>
-          <ion-button expand="block" color="dark" (click)="mostrarModal = false">Cerrar</ion-button>
-        </ion-content>
-      </ng-template>
-    </ion-modal>
+    <!-- Textarea para escribir -->
+    <ion-input
+      *ngIf="!isKeyboardOpen"
+      placeholder="Enviar mensaje a EcoChat"
+      [value]="pregunta"
+      (click)="activarTextarea()"
+      (ionFocus)="activarTextarea()"
+      class="eco-input">
+    </ion-input>
 
-    <!-- Botones a la derecha -->
-    <ion-buttons slot="end">
+    <ion-textarea
+      *ngIf="isKeyboardOpen"
+      #ecoInput
+      placeholder="Enviar mensaje a EcoChat"
+      [(ngModel)]="pregunta"
+      (ionInput)="verificarInput()"
+      rows="1"
+      class="eco-input">
+    </ion-textarea>
 
-      <ion-button shape="round"
-                  color="dark"
-                  (click)="irLocalizaciones()"
-                  [disabled]="isLoading">
-        <ion-icon slot="icon-only" name="locate"></ion-icon>
-      </ion-button>
+    <!-- Botones -->
+    <div class="eco-actions">
+      <!-- Izquierda -->
+      <div class="eco-left">
+        <ion-button shape="round" size="small" fill="clear" (click)="irHome()">
+          <ion-icon slot="icon-only" name="logo-firefox"></ion-icon>
+        </ion-button>
 
-      <!-- Mostrar botón de enviar SOLO si hay texto -->
-      <ion-button *ngIf="pregunta.trim().length > 0"
-                  shape="round"
-                  color="dark"
-                  (click)="obtenerRespuesta()"
-                  [disabled]="isLoading">
-        <ion-icon slot="icon-only" name="send"></ion-icon>
-      </ion-button>
+        <ion-label class="textCenter">EcoChat</ion-label>
 
-      <!-- Mostrar botón de micrófono SOLO si NO hay texto -->
-      <ion-button *ngIf="pregunta.trim().length === 0"
-                  shape="round"
-                  color="dark"
-                  (click)="grabarAudio()"
-                  [disabled]="isLoading">
-        <ion-icon slot="icon-only" name="mic"></ion-icon>
-      </ion-button>
+      </div>
 
-    </ion-buttons>
+      <!-- Derecha -->
+      <div class="eco-right">
+        <ion-button shape="round" fill="clear" (click)="irLocalizaciones()" [disabled]="isLoading">
+          <ion-icon slot="icon-only" name="locate"></ion-icon>
+        </ion-button>
+        
+        <ion-button *ngIf="pregunta.trim().length > 0" shape="round" fill="clear" (click)="obtenerRespuesta()" [disabled]="isLoading">
+          <ion-icon slot="icon-only" name="send"></ion-icon>
+        </ion-button>
 
-  </ion-toolbar>
+        <ion-button *ngIf="pregunta.trim().length === 0" shape="round" fill="clear" (click)="grabarAudio()" [disabled]="isLoading">
+          <ion-icon slot="icon-only" name="mic"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
+  </div>
 </ion-footer>
 
 <!-- Botón flotante -->
 <ion-fab vertical="bottom" horizontal="end" slot="fixed"
-          [style.marginBottom]="isKeyboardOpen ? '-10px' : '-10px'"
-          style="margin-right: 90px; transition: margin-bottom 0.3s; z-index: 2000;">
+          [style.marginBottom]="isKeyboardOpen ? '-5px' : '10px'"
+          class="custom-fab">
   <ion-fab-button color="dark" size="small" (click)="abrirFabYReenfocar()">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 
-  <ion-fab-list side="top" style="z-index: 2000;">
+  <ion-fab-list side="top">
     <ion-fab-button color="dark" size="small" (click)="addPhotoToUpload()">
       <ion-icon name="images-sharp"></ion-icon>
     </ion-fab-button>
-    <ion-fab-button color="success" size="small" (click)="enviar()" [disabled]="isLoading">
-      <ion-icon name="send"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-button color="success" size="small" (click)="addFileToUpload()" [disabled]="isLoading">
+    <ion-fab-button color="dark" size="small" (click)="addFileToUpload()" [disabled]="isLoading">
       <ion-icon name="folder-open-sharp"></ion-icon>
     </ion-fab-button>
     <ion-fab-button color="dark" size="small" (click)="addPhotoToGallery()" [disabled]="isLoading">
@@ -254,7 +229,6 @@
 <ion-modal 
   [isOpen]="mensajeSeleccionado !== null" 
   (didDismiss)="mensajeSeleccionado = null"
-  class="modal-opciones"
   initialBreakpoint="0.25"
 >
   <ng-template>
@@ -273,7 +247,7 @@
       <!-- Botón para copiar al portapapeles -->
       <ion-button 
         expand="block" 
-        fill="outline" 
+        fill="clear" 
         color="dark" 
         (click)="copiarAlPortapapeles(mensajeSeleccionado.text)">
         <ion-icon slot="start" name="copy"></ion-icon>
@@ -282,7 +256,7 @@
 
       <ion-button 
         expand="block" 
-        fill="outline" 
+        fill="clear" 
         color="dark" 
         (click)="leerMensaje(mensajeSeleccionado.text)">
         <ion-icon slot="start" name="volume-high"></ion-icon>
