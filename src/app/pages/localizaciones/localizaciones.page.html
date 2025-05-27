@@ -1,0 +1,120 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Localizaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="locations-container">
+    
+    <!-- Sección de Reciclaje -->
+    <div class="section-header">
+      <h2 class="section-title">Puntos de Reciclaje</h2>
+    </div>
+    
+    <div class="locations-grid">
+      <div class="location-card recycling-card" (click)="irAlLugar()">
+        <div class="location-header">
+          <div class="location-info">
+            <h3 class="location-name">Centro Municipal de reciclaje</h3>
+          </div>
+        </div>
+        <p class="location-details">
+          Acepta: Plástico, papel, vidrio y metales<br>
+          Horario: Lun-Sáb 8:00-18:00
+        </p>
+        <div class="location-actions">
+          <ion-button fill="clear" size="small" class="action-btn">
+            Ir
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="location-card recycling-card" (click)="irAlLugar()">
+        <div class="location-header">
+          <div class="location-info">
+            <h3 class="location-name">Reciclajes Tarija</h3>
+          </div>
+        </div>
+        <p class="location-details">
+          Acepta: Aluminio, cartin, baterias, cobre <br>
+          papel blanco, papel de color y periodico <br>
+          Horario: Lunes-Viernes 14:00-18:00
+        </p>
+        <div class="location-actions">
+          <ion-button fill="clear" size="small" class="action-btn">
+            Ir
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="location-card recycling-card" (click)="irAlLugar()">
+        <div class="location-header">
+          <div class="location-info">
+            <h3 class="location-name">Recicladora Virgen de Urkupiña</h3>
+          </div>
+        </div>
+        <p class="location-details">
+          Reciclaje de cobre, bronce y aluminio<br>
+          Horario: Lun-Vie 8:00-19:00
+        </p>
+        <div class="location-actions">
+          <ion-button fill="clear" size="small" class="action-btn">
+            Ir
+          </ion-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección de Turismo -->
+    <div class="section-header">
+      <h2 class="section-title">Turismo Sostenible</h2>
+    </div>
+    
+    <div class="locations-grid">
+      <div class="location-card tourism-card" (click)="irAlLugar()">
+        <div class="location-header">
+          <div class="location-info">
+            <h3 class="location-name">Reserva Biológica de la Cordillera de Sama</h3>
+          </div>
+          <span class="distance-badge">Municipio</span>
+        </div>
+        <p class="location-details">
+          El circuito de Tajzara, a 3.600 m.s.n.m., ofrece lagunas, fauna andina, dunas, iglesias y talleres. <br>
+          Accesible todo el año, cuando no llueve
+        </p>
+        <div class="location-actions">
+          <ion-button fill="clear" size="small" class="action-btn">
+            Ir
+          </ion-button>
+          <ion-button fill="clear" size="small" class="action-btn"
+            onclick="window.open('https://tarijaturismo.com/tajzara/', '_blank')"> 
+            Información
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="location-card tourism-card" (click)="irAlLugar()">
+        <div class="location-header">
+          <div class="location-info">
+            <h3 class="location-name">Parque de las Flores</h3>
+          </div>
+          <span class="distance-badge">Parque</span>
+        </div>
+        <p class="location-details">
+          Un lugar hermoso y tranquilo en la zona La Loma, entre las calles Cochabamba y Aniceto Arce, ideal para relajarse y disfrutar de la vista, los árboles y las flores.<br>
+        </p>
+        <div class="location-actions">
+          <ion-button fill="clear" size="small" class="action-btn">
+            Ir
+          </ion-button>
+          <ion-button fill="clear" size="small" class="action-btn"
+           onclick="window.open('https://tarijaturismo.com/parque-de-las-flores/', '_blank')">
+            Información
+          </ion-button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

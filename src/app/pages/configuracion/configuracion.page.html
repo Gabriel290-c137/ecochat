@@ -1,0 +1,72 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">Configuración</ion-title>
+
+    <ion-buttons slot="end">
+      <div style="width: 44px;"></div> <!-- Espaciador -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div style="display: flex; align-items: center; margin-bottom: 20px;">
+    <div style="
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #3c3838;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+    ">
+      <ion-icon name="person-circle" style="font-size: 32px;"></ion-icon>
+    </div>
+    <div>
+      <h2 style="font-weight: bold; margin: 0;">{{ nombre }}</h2>
+      <p style="color: #666; margin: 0;">{{ correo }}</p>
+    </div>
+  </div>
+
+  <ion-list lines="none">
+      <ion-item lines="none">
+    <ion-button color="dark" expand="block" fill="clear" (click)="irDonaciones()">
+      <ion-label class="ion-text-start" style="display: flex; flex-direction: column; align-items: flex-start;">
+        <h3 style="margin: 0;">Donaciones</h3>
+        <p style="margin: 0;">puedes ayudarnos</p>
+      </ion-label>
+    </ion-button>
+  </ion-item>
+  </ion-list>
+
+  <ion-list lines="none" style="margin-top: 30px;">
+    <ion-item>
+        <ion-button fill="clear" color="dark" (click)="irCuenta()">Cuenta</ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-button fill="clear" color="dark" (click)="abrirFormulario()">Realizar encuesta más reciente</ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-button fill="clear"color="dark" (click)="abrirComentarios()">Enviar comentarios</ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-button fill="clear" color="dark" (click)="irARInfopage()">Acerca de</ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-button fill="clear" fill="clear" color="danger" (click)="CerrarSesion()">Cerrar Sesión</ion-button>
+    </ion-item>
+  </ion-list>
+
+  <div style="text-align: center; margin-top: 40px; color: #666; font-size: 12px;">
+    <p>Privacidad | Condiciones de uso | Preguntas más frecuentes</p>
+  </div>
+</ion-content>

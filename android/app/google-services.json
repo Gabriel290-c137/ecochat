@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "213178519857",
+    "project_id": "ecochat-41e35",
+    "storage_bucket": "ecochat-41e35.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213178519857:android:bee480e00ed5d61e122010",
+        "android_client_info": {
+          "package_name": "com.ecochat.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213178519857-ks5qma55eunl9o7v9vctnno29iqd8cdh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ecochat.myapp",
+            "certificate_hash": "fa797367530379e00eaec254e81fecfed0ce372c"
+          }
+        },
+        {
+          "client_id": "213178519857-cj2o8phkkq3vohh1kcmoe49f5lpkvr38.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6nLMUgSFZkNhAmm_Dp_8durTSkWNp9Kw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213178519857-cj2o8phkkq3vohh1kcmoe49f5lpkvr38.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

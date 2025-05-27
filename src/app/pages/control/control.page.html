@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Control por Voz</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+<ion-content class="ion-padding" [class.escuchando]="estaEscuchando">
+
+<!-- Círculo central que se anima -->
+  <div class="circulo-central" [class.activo]="estaEscuchando">
+    <div class="circulo-interno"></div>
+    <div class="onda onda-1"></div>
+    <div class="onda onda-2"></div>
+    <div class="onda onda-3"></div>
+  </div>
+
+  <!-- Botones en las esquinas inferiores -->
+  <ion-button 
+  
+    class="boton-circular boton-izquierda" 
+    (click)="detenerConversacion()"
+    fill="solid"
+    shape="round">
+    <i class="fas fa-microphone-slash"></i>
+  </ion-button>
+
+  <ion-button 
+    class="boton-circular boton-derecha" 
+    (click)="iniciarConversacion()"
+    fill="solid"
+    shape="round">
+    
+  </ion-button>
+</ion-content>

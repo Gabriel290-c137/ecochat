@@ -1,0 +1,18 @@
+<ion-header class="ion-no-border">
+</ion-header>
+
+<ion-content class="ion-padding"> <div class="registro-page"></div>
+  <div class="registro-page">
+    
+    <ion-card class="login-card">
+      <ion-item>
+        <ion-input [(ngModel)]="email" placeholder="Correo Electrónico"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="password" type="password" placeholder="Contraseña"></ion-input>
+      </ion-item>
+      <ion-button expand="full" color="dark" fill="outline" (click)="registrar()">Registrarse</ion-button>
+
+    </ion-card>    
+  </div>
+</ion-content>

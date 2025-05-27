@@ -1,0 +1,216 @@
+ion-content {
+  .consejos-container {
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+
+    .greeting {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      border: 1px solid rgba(129, 199, 132, 0.3);
+      backdrop-filter: blur(10px);
+      
+      h1 {
+        color: #fff;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+      
+      p {
+        color: #e8f5e8;
+        font-size: 1rem;
+        margin: 0;
+      }
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 2rem 0 1rem 0;
+      padding: 0 0.5rem;
+      
+      .section-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #fff;
+        margin: 0;
+      }
+    }
+
+    .consejos-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .consejo-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 1.2rem;
+      border: 1px solid rgba(129, 199, 132, 0.3);
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(129, 199, 132, 0.5);
+      }
+      
+      .consejo-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.8rem;
+        
+        .consejo-info {
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
+          
+          .consejo-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+          }
+        }
+        
+        .tip-badge {
+          background: rgba(129, 199, 132, 0.2);
+          color: #a5d6a7;
+          padding: 0.3rem 0.8rem;
+          border-radius: 12px;
+          font-size: 0.8rem;
+          font-weight: 500;
+        }
+      }
+      
+      .consejo-details {
+        color: #e8f5e8;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin: 0;
+        
+        strong {
+          color: #a5d6a7;
+          font-weight: 600;
+        }
+      }
+    }
+
+    // Colores específicos por sección
+    .agua-card {
+      border-color: rgba(100, 181, 246, 0.3);
+      
+      .tip-badge {
+        background: rgba(100, 181, 246, 0.2);
+        color: #90caf9;
+      }
+      
+      .consejo-details strong {
+        color: #90caf9;
+      }
+    }
+
+    .energia-card {
+      border-color: rgba(255, 193, 7, 0.3);
+      
+      .tip-badge {
+        background: rgba(255, 193, 7, 0.2);
+        color: #fff176;
+      }
+      
+      .consejo-details strong {
+        color: #fff176;
+      }
+    }
+
+    .consumo-card {
+      border-color: rgba(156, 39, 176, 0.3);
+      
+      .tip-badge {
+        background: rgba(156, 39, 176, 0.2);
+        color: #ce93d8;
+      }
+      
+      .consejo-details strong {
+        color: #ce93d8;
+      }
+    }
+
+    .reciclaje-card {
+      border-color: rgba(76, 175, 80, 0.3);
+      
+      .tip-badge {
+        background: rgba(76, 175, 80, 0.2);
+        color: #a5d6a7;
+      }
+      
+      .consejo-details strong {
+        color: #a5d6a7;
+      }
+    }
+
+    .movilidad-card {
+      border-color: rgba(255, 87, 34, 0.3);
+      
+      .tip-badge {
+        background: rgba(255, 87, 34, 0.2);
+        color: #ffab91;
+      }
+      
+      .consejo-details strong {
+        color: #ffab91;
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 480px) {
+  ion-content .consejos-container {
+    padding: 0.5rem;
+    
+    .greeting {
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      p {
+        font-size: 0.9rem;
+      }
+    }
+    
+    .section-header {
+      margin: 1.5rem 0 0.8rem 0;
+      
+      .section-title {
+        font-size: 1.2rem;
+      }
+    }
+    
+    .consejo-card {
+      padding: 1rem;
+      
+      .consejo-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        
+        .tip-badge {
+          align-self: flex-end;
+        }
+      }
+    }
+  }
+}

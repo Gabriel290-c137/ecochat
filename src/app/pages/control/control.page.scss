@@ -1,0 +1,317 @@
+@import 'node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+
+ion-header {
+  box-shadow: none !important;
+  border-bottom: none !important;
+
+  ion-toolbar {
+    --background: transparent !important;
+    --border-width: 0 !important;
+    --box-shadow: none !important;
+    box-shadow: none !important;
+    border: none !important;
+
+    ion-title {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+}
+
+// Estilos para la página de Control por Voz
+ion-content {  
+  position: relative;
+  
+  .ion-padding {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+}
+
+// Círculo central que se anima cuando hablas
+.circulo-central {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  
+  .circulo-interno {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ffffff 0%, #128c7e 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 12;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+    
+    &::after {
+      content: '';
+      font-size: 28px;
+      color: white;
+    }
+  }
+  
+  .onda {
+    position: absolute;
+    border: 2px solid rgba(37, 211, 102, 0.3);
+    border-radius: 50%;
+    opacity: 0;
+    animation: none;
+  }
+  
+  .onda-1 {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .onda-2 {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .onda-3 {
+    width: 180px;
+    height: 180px;
+  }
+  
+  // Cuando está activo (escuchando)
+  &.activo {
+    .circulo-interno {
+      animation: pulso-central 1.5s infinite ease-in-out;
+      background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+      
+      &::after {
+        content: '';
+        animation: parpadeo 1s infinite;
+      }
+    }
+    
+    .onda {
+      animation: onda-expansion 2s infinite ease-out;
+    }
+    
+    .onda-1 {
+      animation-delay: 0s;
+    }
+    
+    .onda-2 {
+      animation-delay: 0.3s;
+    }
+    
+    .onda-3 {
+      animation-delay: 0.6s;
+    }
+  }
+}
+
+// Animaciones para el círculo central
+@keyframes pulso-central {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(107, 255, 220, 0.3);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(107, 255, 122, 0.6);
+  }
+}
+
+@keyframes onda-expansion {
+  0% {
+    opacity: 1;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}
+
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+// Estilos para los botones circulares
+.boton-circular {
+  --border-radius: 50%;
+  --padding-start: 0;
+  --padding-end: 0;
+  width: 70px;
+  height: 70px;
+  font-size: 24px;
+  font-weight: 500;
+  text-transform: none;
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  z-index: 15;
+  
+  &:active {
+    transform: scale(0.9);
+  }
+  
+  // Remover cualquier texto del botón
+  ion-label {
+    display: none;
+  }
+}
+
+// Botón de detener (izquierda abajo) - Rojo suave que combina
+.boton-izquierda {
+  --background: #be2214cd;
+  --background-activated: #d73527;
+  --background-hover: #d73527;
+  --color: white;
+  --box-shadow: 0 4px 12px rgba(231, 74, 59, 0.4);
+  
+  bottom: 50px;
+  left: 30px;
+  
+  &:hover {
+    --box-shadow: 0 6px 16px rgba(231, 74, 59, 0.5);
+    transform: translateY(-2px);
+  }
+  
+  // Icono X dentro del círculo
+  &::after {
+    content: '\f131'; // Código del ícono "microphone-slash"
+    font-family: 'Font Awesome 6 Free'; // Asegúrate de usar la fuente correcta
+    font-weight: 900; // Importante: 900 = íconos sólidos
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    pointer-events: none;
+  }
+}
+
+// Botón de iniciar (derecha abajo) - Verde más suave
+.boton-derecha {
+  --background: #27ae5fb1;
+  --background-activated: #229954;
+  --background-hover: #229954;
+  --color: white;
+  --box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+  
+  bottom: 50px;
+  right: 30px;
+  
+  &:hover {
+    --box-shadow: 0 6px 16px rgba(39, 174, 96, 0.5);
+    transform: translateY(-2px);
+  }
+  
+  // Icono check/palomita dentro del círculo
+    &::after {
+    content: '\f130'; // Unicode del ícono del micrófono en Font Awesome
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900; // Necesario para los íconos sólidos
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    color: white;
+    pointer-events: none;
+  }
+
+}
+
+// Estado cuando está escuchando
+.escuchando {
+  .boton-derecha {
+    --background: #229954 !important;
+    --background-activated: #20b15d !important;
+    animation: pulso-boton 1.5s infinite;
+    
+  }
+}
+
+@keyframes pulso-boton {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 230, 106, 0.2), 0 4px 12px rgba(34, 230, 106, 0.15);
+    transform: scale(1);
+    border-radius: 50%;
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(114, 248, 80, 0.08), 0 8px 20px rgba(114, 248, 80, 0.18);
+    transform: scale(1.05);
+    border-radius: 50%;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 230, 227, 0.2), 0 4px 12px rgba(34, 230, 227, 0.15);
+    transform: scale(1);
+    border-radius: 50%;
+  }
+}
+
+
+// Haz las ondas más discretas
+.circulo-central .onda {
+  border: 2px solid rgba(37, 211, 102, 0.13);
+  box-shadow: 0 0 8px 0 rgba(37, 211, 102, 0.08);
+}
+
+// Responsive para pantallas más pequeñas
+@media (max-width: 480px) {
+  .boton-circular {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+  }
+  
+  .boton-izquierda {
+    bottom: 30px;
+    left: 20px;
+    
+    &::after {
+      font-size: 24px;
+    }
+  }
+  
+  .boton-derecha {
+    bottom: 30px;
+    right: 20px;
+    
+    &::after {
+      font-size: 28px;
+    }
+  }
+  
+  .circulo-central {
+    width: 100px;
+    height: 100px;
+    
+    .circulo-interno {
+      width: 70px;
+      height: 70px;
+      
+      &::after {
+        font-size: 24px;
+      }
+    }
+  }
+  
+  .escuchando {
+    .boton-derecha::after {
+      font-size: 20px !important;
+    }
+  }
+}
