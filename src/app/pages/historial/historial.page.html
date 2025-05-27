@@ -1,14 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <!-- <ion-button shape="round" color="dark" (click)="irMenu()">
-        <ion-icon slot="icon-only" name="close"></ion-icon>
-      </ion-button> -->
     <ion-back-button default-href="#"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button shape="round" color="dark" (click)="irConfiguracion()">
-        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+        <ion-icon name="person-circle" class="icono-grande"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -31,18 +28,25 @@
   </div>
 
   <!-- Lista de botones -->
-  <div *ngIf="!cargando && colecciones.length > 0">
+<div *ngIf="!cargando && colecciones.length > 0">
   <ion-list lines="none">
-    <div *ngFor="let col of colecciones" class="boton-conversacion">
-      <div class="fecha-conversacion">{{ col.fecha }}</div>
-      <div style="display: flex; align-items: center;">
-        <ion-button expand="block" color="light" (click)="abrirConversacion(col.nombre)" style="flex: 1;">
-          {{ col.alias }}
-        </ion-button>
-        <ion-button color="dark" fill="clear" size="small" style="margin-left: 4px;" (click)="abrirOpciones(col)">
-          ⋮
-        </ion-button>
-      </div>
+    <div *ngFor="let col of colecciones" class="contenedor-conversacion">
+      <ion-button (click)="abrirConversacion(col.nombre)" expand="block" class="boton-conversacion">
+        <div class="contenido-boton">
+          <div class="texto">
+            <div class="alias">{{ col.alias }}</div>
+            <div class="fecha">{{ col.fecha }}</div>
+          </div>
+          <ion-button
+            color="dark"
+            fill="clear"
+            class="boton-opciones"
+            (click)="abrirOpciones(col)"
+            (click)="abrirOpciones(col); $event.stopPropagation();">
+            ⋮
+          </ion-button>
+        </div>
+      </ion-button>
     </div>
   </ion-list>
 </div>
@@ -53,75 +57,76 @@
   <p>Tus conversaciones y páginas<br>se guardarán aquí.</p>
 </div>
 
-    <ion-modal 
+    <ion-modal
+      class="modal-opciones"
       [isOpen]="mostrarModal" 
       (didDismiss)="mostrarModal = false"
       class="modal-opciones"
       initialBreakpoint="0.25"        
     >
       <ng-template>
-        <ion-content class="ion-padding">
+        <ion-content class="ion-padding" class="modal-content">
           <!-- Adorno tipo handle -->
-          <div 
-            style="
-              width: 40px;
-              height: 4px;
-              background-color: #ccc;
-              border-radius: 2px;
-              margin: 8px auto 16px auto;
-            ">
+          <div
+            class="modal-handle"
+            >
           </div>
-          <ion-button 
-            expand="block" 
-            fill="outline" 
-            color="dark"
-            (click)="abrirModalCambiarNombre(coleccionSeleccionada.nombre)">
-            Cambiar nombre
-          </ion-button>
+          <div class="botones-container">
+            <ion-button
+              fill="clear"
+              color="dark"
+              class="boton-modal"
+              (click)="abrirModalCambiarNombre(coleccionSeleccionada.nombre)">
+              <ion-icon name="open-outline"></ion-icon>
+              Cambiar nombre
+            </ion-button>
 
-          <ion-button 
-            expand="block" 
-            fill="outline" 
-            color="danger" 
-            (click)="eliminarConversacion()">
-            Eliminar conversación
-          </ion-button>
+            <ion-button
+              fill="clear"
+              color="danger"
+              class="boton-modal"
+              (click)="eliminarConversacion()">
+              <ion-icon name="trash-outline"></ion-icon>
+              Borrar
+            </ion-button>
+          </div>
         </ion-content>
       </ng-template>
     </ion-modal>
 
-      <ion-modal 
+      <ion-modal
+        class="modal-opciones"
         [isOpen]="mostrarModalCambiarNombre" 
         (didDismiss)="cerrarAmbosModales()"
         class="modal-opciones"
         initialBreakpoint="0.4">
         
         <ng-template>
-          <ion-content class="ion-padding">
+          <ion-content class="ion-padding" class="modal-content">
             <!-- Adorno tipo handle -->
-            <div 
-              style="width: 40px; height: 4px; background-color: #ccc; border-radius: 2px; margin: 8px auto 16px auto;">
+            <div
+              class="modal-handle">
             </div>
 
             <h2>Cambiar nombre</h2>
             <h5>Nombre de la colección</h5>
 
             <!-- Input con nombre actual -->
-            <ion-item lines="none" style="margin-top: 20px;">
               <ion-input
+                class="input-redondeado"
                 placeholder="Nuevo nombre"
                 [value]="nuevoNombre"
                 (ionInput)="onNombreInput($event)"
+                (keydown.enter)="actualizarNombreColeccion()"
                 type="text">
               </ion-input>
-            </ion-item>
 
-            <ion-button
-              expand="block"
-              color="primary"
+
+            <ion-button 
+              expand="block" 
+              class="boton-redondeado"
               [disabled]="!nombreCambiado"
-              (click)="actualizarNombreColeccion()"
-              style="margin-top: 30px;">
+              (click)="actualizarNombreColeccion()">
               Actualizar
             </ion-button>
           </ion-content>

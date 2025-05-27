@@ -11,8 +11,15 @@
 
 /* This sets a different item border color for the default theme on ios and md */
 :root {
+  --background-dark: linear-gradient(to bottom, #0a2f26, #124a35, #1b684a, #2a9768, #3fbb85);
+  --background-light: linear-gradient(to bottom, #ffffff, #f0fbec, #e0f7d5, #c8f2b8, #aeea96);
+  --text-dark: white;
+  --text-light: black;
+}
+
+:root {
   --ion-item-border-color: var(--ion-background-color-step-200);
-  --background-darkz: linear-gradient(to bottom, #0a2f26, #124a35, #1b684a);
+  --background-darkz: linear-gradient(to bottom, #061e19 ,#0a2f26);
   --background-lightz: linear-gradient(to bottom, #ffffff, #f0fbec, #e0f7d5);
 }
 
@@ -30,17 +37,10 @@
   --ion-item-background: #fff;
 }
 
-:root {
-  --background-dark: linear-gradient(to bottom, #0a2f26, #124a35, #1b684a, #2a9768, #3fbb85);
-  --background-light: linear-gradient(to bottom, #ffffff, #f0fbec, #e0f7d5, #c8f2b8, #aeea96, #8ee16f);
-  --text-dark: white;
-  --text-light: black;
-}
-
 /* This sets a different item background when dark mode is enabled on ios and md */
 .ion-palette-dark.ios,
 .ion-palette-dark.md {
   --ion-background-color: var(--background-darkz);
   --ion-toolbar-background: var(--ion-background-color);
-  --ion-item-background: var(--background-darkz);;
+  --ion-item-background: var(--background-darkz);
 }

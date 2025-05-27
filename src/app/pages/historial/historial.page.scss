@@ -1,0 +1,211 @@
+:host {
+  html, body, ion-app, ion-router-outlet, ion-page, ion-content {
+    height: 100%;
+  }
+
+  /* 2. Degradado en el wrapper de la app */
+  ion-app {
+    background: linear-gradient(--background-darkz) !important;
+  }
+
+  /* 3. Header y footer transparentes */
+  ion-header,
+  ion-list,
+  ion-toolbar{
+    --background: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    z-index: 10;
+  }
+
+  /* 4. ion-content sin padding de fondo */
+  ion-content {
+    --background: transparent;
+    background: transparent !important;
+  }
+}
+
+.icono-grande {
+  font-size: 48px;
+}
+
+.titulo-lista h2 {
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 0;
+  padding-top: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* si el icono está al lado */
+}
+
+.contenedor-conversacion {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  
+
+  .boton-conversacion {
+    flex: 1;
+    display: flex;
+    padding: 0.1px;
+    text-align: left;
+    margin-top: 0;
+    padding-top: 0;
+    color: white;
+    --box-shadow: none;
+    --background: #124a35;
+    --border-radius: 16px;
+  }
+
+  .contenido-boton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .texto {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    overflow: hidden;
+  }
+
+  .fecha {
+    font-size: 12px;
+    font-weight: 300;
+    opacity: 0.7;
+    white-space: nowrap;
+    margin-bottom: 4px;
+    text-transform: none;
+  }
+
+  .alias {
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: none;
+    max-width: 100%;
+  }
+
+  .boton-opciones {
+    margin-left: auto;
+    min-width: 32px;
+    height: 48px;
+    font-size: 20px;
+    padding: 0;
+    --padding-start: 0;
+    --padding-end: 0;
+  }
+}
+
+.modal-opciones::part(backdrop) {
+  --backdrop-opacity: 0.3;
+}
+
+.modal-opciones::part(content) {
+  --background: #124a35;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 16px; // opcional
+}
+
+.modal-content{
+  --background: #124a35;
+}
+
+.botones-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* fuerza alineación a la izquierda */
+  gap: 12px;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.boton-modal {
+  display: flex !important;
+  align-items: center;
+  text-transform: none;
+  font-size: 16px;
+  gap: 8px;
+  padding-left: 0;
+}
+
+h2 {
+  margin-bottom: 32px; // separación entre título y subtítulo (~0.5 cm)
+}
+
+h5 {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0; // asegura que no tenga margen extra no deseado
+}
+
+.input-redondeado {
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --background: #0a2f26;
+  --highlight-color: var(--ion-color-darkz);
+  color: var(--ion-color-darkz);
+  margin-top: 12px;
+  font-size: 16px;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.boton-redondeado {
+  --background: #0a2f26;
+  --border-radius: 12px;
+  --color: #aee5d4;
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+  text-transform: none;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 32px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+@media (prefers-color-scheme: light) {
+  .boton-conversacion {
+    --background: #e0f7d5 !important;
+    color: #124a35 !important;
+  }
+
+  .modal-opciones::part(content),
+  .modal-content,
+  .modal-content > div,
+  ion-content.modal-content {
+    --background: white !important;
+    background-color: white !important;
+    color: #124a35 !important;
+  }
+
+  .boton-redondeado {
+    --background: white !important;
+    --color: #124a35 !important;
+    color: #124a35 !important;
+    background-color: white !important;
+    border: 1px solid #ccc;
+  }
+
+  .input-redondeado {
+    --background: white !important;
+    background-color: white !important;
+    color: #124a35 !important;
+    border: 1px solid #ccc;
+  }
+}

@@ -1,18 +1,36 @@
-<ion-header class="ion-no-border">
-</ion-header>
+<ion-buttons class="boton-back">
+  <ion-back-button default-href="#"></ion-back-button>
+</ion-buttons>
 
-<ion-content class="ion-padding"> <div class="registro-page"></div>
+<ion-content class="ion-padding">
+
   <div class="registro-page">
-    
-    <ion-card class="login-card">
-      <ion-item>
-        <ion-input [(ngModel)]="email" placeholder="Correo Electrónico"></ion-input>
+    <!-- Texto arriba -->
+      <div class="texto-bienvenida">
+        <h2>Crea tu cuenta</h2>
+        <p>Regístrate y empieza a guardar tus ideas, ¡tu experiencia personalizada comienza aquí!</p>
+      </div>
+
+    <ion-card>
+      <ion-item [ngClass]="{'activo': email}">
+        <ion-icon name="person" slot="start" [class.oculto]="email"></ion-icon>
+        <ion-input [(ngModel)]="email" placeholder="Correo Electrónico "></ion-input>
       </ion-item>
-      <ion-item>
+
+      <ion-item [ngClass]="{'activo': password}">
+        <ion-icon name="lock-closed" slot="start" [class.oculto]="password"></ion-icon>
         <ion-input [(ngModel)]="password" type="password" placeholder="Contraseña"></ion-input>
       </ion-item>
-      <ion-button expand="full" color="dark" fill="outline" (click)="registrar()">Registrarse</ion-button>
 
     </ion-card>    
+    <ion-button (click)="registrar()">
+    <ion-icon name="person-add" slot="start"></ion-icon>
+      Registrarse
+    </ion-button>
+
+    <div>
+        <img src="assets/icon/LogoUCB.png" alt="Logo UCB" class="logo-ucb" *ngIf="!tecladoAbierto">
+    </div>
+    
   </div>
 </ion-content>
