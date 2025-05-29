@@ -13,7 +13,7 @@
     </div>
     
     <div class="consejos-grid">
-      <div class="consejo-card agua-card">
+      <div class="consejo-card agua-card" (click)="navegarA('https://www.promart.pe/blog/8-consejos-como-ahorrar-agua-en-casa')">
         <div class="consejo-header">
           <div class="consejo-info">
             <h3 class="consejo-name">Ahorra agua en casa</h3>
@@ -26,7 +26,7 @@
         </p>
       </div>
 
-      <div class="consejo-card agua-card">
+      <div class="consejo-card agua-card" (click)="navegarA('https://reducereutilizarecicla.org/como-ahorrar-agua/')">
         <div class="consejo-header">
           <div class="consejo-info">
             <h3 class="consejo-name">Reutiliza el agua</h3>
@@ -46,7 +46,7 @@
     </div>
     
     <div class="consejos-grid">
-      <div class="consejo-card energia-card">
+      <div class="consejo-card energia-card" (click)="navegarA('https://www.infobae.com/america/tecno/2022/04/21/por-que-es-importante-desconectar-los-aparatos-electricos-cuando-no-se-esta-en-casa/')">
         <div class="consejo-header">
           <div class="consejo-info">
             <h3 class="consejo-name">Desconecta dispositivos</h3>
@@ -59,7 +59,7 @@
         </p>
       </div>
 
-      <div class="consejo-card energia-card">
+      <div class="consejo-card energia-card" (click)="navegarA('https://algsa.es/es/noticia/iluminacion-led-y-sostenibilidad-como-contribuye-al-medio-ambiente/')">
         <div class="consejo-header">
           <div class="consejo-info">
             <h3 class="consejo-name">Bombillas LED</h3>
@@ -72,10 +72,10 @@
         </p>
       </div>
 
-      <div class="consejo-card energia-card">
+      <div class="consejo-card energia-card" (click)="navegarA('https://euroclima.info/climatizacion-sostenible/')">
         <div class="consejo-header">
           <div class="consejo-info">
-            <h3 class="consejo-name">Climatización consciente</h3>
+            <h3 class="consejo-name">Climatización sostenible</h3>
           </div>
           <span class="tip-badge">Hábito</span>
         </div>
@@ -92,7 +92,7 @@
     </div>
     
     <div class="consejos-grid">
-      <div class="consejo-card consumo-card">
+      <div class="consejo-card consumo-card" (click)="navegarA('https://www.bbva.com/es/sostenibilidad/compras-sostenibles-a-granel-sin-plasticos-y-evitando-el-desperdicio-alimentario/')">
         <div class="consejo-header">
           <div class="consejo-info">
             <h3 class="consejo-name">Compra a granel</h3>
@@ -105,7 +105,7 @@
         </p>
       </div>
 
-      <div class="consejo-card consumo-card">
+      <div class="consejo-card consumo-card" (click)="navegarA('https://clickoala.com/noticias/consumo-local-que-es-ejemplos/')">
         <div class="consejo-header">
           <div class="consejo-info">
             <h3 class="consejo-name">Consume local</h3>
@@ -125,7 +125,7 @@
     </div>
     
     <div class="consejos-grid">
-      <div class="consejo-card reciclaje-card">
+      <div class="consejo-card reciclaje-card" (click)="navegarA('https://lcc.eco/procesos-de-reciclaje-y-reutilizacion/')">
         <div class="consejo-header">
           <div class="consejo-info">
             <h3 class="consejo-name">Separa correctamente</h3>
@@ -138,18 +138,7 @@
         </p>
       </div>
 
-      <div class="consejo-card reciclaje-card">
-        <div class="consejo-header">
-          <div class="consejo-info">
-            <h3 class="consejo-name">Economía circular</h3>
-          </div>
-          <span class="tip-badge">Creativo</span>
-        </div>
-        <p class="consejo-details">
-          Reutiliza, repara, dona y transforma antes de comprar nuevo. Dale segunda vida a tus objetos.<br>
-          <strong>Filosofía:</strong> Reducir, reutilizar, reciclar
-        </p>
-      </div>
+      
     </div>
 
     <!-- Sección de Movilidad -->
@@ -158,7 +147,7 @@
     </div>
     
     <div class="consejos-grid">
-      <div class="consejo-card movilidad-card">
+      <div class="consejo-card movilidad-card" (click)="navegarA('https://www.barterenergy.es/medios-de-transporte-ecologicos/')">
         <div class="consejo-header">
           <div class="consejo-info">
             <h3 class="consejo-name">Transporte ecológico</h3>
@@ -171,7 +160,6 @@
         </p>
       </div>
     </div>
-
 
   </div>
 </ion-content>

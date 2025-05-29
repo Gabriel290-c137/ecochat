@@ -24,11 +24,9 @@ export class LocalizacionesPage implements OnInit {
 
   constructor(private mapsService: MapsService) { }
 
-  irAlLugar() {
-    const destinoLat = -21.5375;
-    const destinoLng = -64.7296;
-    this.mapsService.abrirRuta(destinoLat, destinoLng);
-  }
+  irAlLugar(lat: number, lng: number) {
+  this.mapsService.abrirRuta(lat, lng);
+}
 
   ngOnInit() {
   }

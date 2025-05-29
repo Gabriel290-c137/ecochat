@@ -1,4 +1,3 @@
-
 ion-header {
   box-shadow: none !important;
   border-bottom: none !important;
@@ -19,9 +18,8 @@ ion-header {
 }
 
 ion-content {
-  
   .locations-container {
-    padding: 1rem;
+    padding: 1.5rem;
     max-width: 600px;
     margin: 0 auto;
 
@@ -31,7 +29,7 @@ ion-content {
       gap: 0.8rem;
       margin: 2rem 0 1rem 0;
       padding: 0 0.5rem;
-      
+
       .section-title {
         position: center;
         font-size: 1.4rem;
@@ -49,95 +47,107 @@ ion-content {
     }
 
     .location-card {
-      background: rgba(255, 255, 255, 0.1);
+      background: #124a35; // Color principal de la card
       border-radius: 16px;
       padding: 1.2rem;
-      border: 1px solid rgba(129, 199, 132, 0.3);
+      border: 1px solid #1e6b4a; // Borde más claro pero en la misma gama
       backdrop-filter: blur(5px);
       cursor: pointer;
-      
+      box-shadow: 0 4px 12px rgba(18, 74, 53, 0.3); // Sombra sutil del mismo color
+
       .location-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-bottom: 0.8rem;
-        
+
         .location-info {
           display: flex;
           align-items: center;
           gap: 0.8rem;
-          
+
           .location-name {
             font-size: 1.1rem;
             font-weight: 600;
-            color: #fff;
+            color: #f0f8f5; // Blanco verdoso suave para buen contraste
             margin: 0;
           }
         }
-        
+
         .distance-badge {
-          background: rgba(129, 199, 132, 0.2);
-          color: #a5d6a7;
+          background: rgba(46, 125, 87, 0.3); // Verde medio con transparencia
+          color: #90e0a8; // Verde claro para el texto
           padding: 0.3rem 0.8rem;
           border-radius: 12px;
           font-size: 0.8rem;
           font-weight: 500;
+          border: 1px solid rgba(144, 224, 168, 0.15); // Borde más suave
         }
       }
-      
+
       .location-details {
-        color: #e8f5e8;
+        color: #b8e6c5; // Verde muy claro para detalles
         font-size: 0.9rem;
         line-height: 1.4;
         margin-bottom: 1rem;
       }
-      
+
       .location-actions {
         display: flex;
         gap: 0.5rem;
-        
+
         .action-btn {
-          --color: #a5d6a7;
-          --color-hover: #81c784;
+          --color: #90e0a8; // Verde claro para botones
+          --color-hover: #6dd387; // Verde más intenso al hover
+          --background: rgba(46, 125, 87, 0.1); // Fondo muy sutil
+          --background-hover: rgba(46, 125, 87, 0.2); // Fondo más visible al hover
           flex: 1;
           font-size: 0.85rem;
+          border: 1px solid rgba(144, 224, 168, 0.15); // Borde mucho más suave
+          border-radius: 8px;
         }
       }
+
+      // Efecto hover para toda la card
+      &:hover {
+        background: #155540; // Ligeramente más claro al hover
+        border-color: #2e7d57;
+        transform: translateY(-2px);
+        transition: all 0.3s ease;
+      }
     }
-    
-    
   }
 }
 
 // Responsive
 @media (max-width: 480px) {
   ion-content .locations-container {
-    padding: 0.5rem;
-    
+    padding: 1rem; // Más espacio en móvil también
+
     .section-header {
       margin: 1.5rem 0 0.8rem 0;
-      
+
       .section-title {
         font-size: 1.2rem;
       }
     }
-    
+
     .location-card {
       padding: 1rem;
-      
+
       .location-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
-        
+
         .distance-badge {
           align-self: flex-end;
         }
       }
-      
+
       .location-actions {
         flex-direction: column;
-        
+
         .action-btn {
           width: 100%;
         }

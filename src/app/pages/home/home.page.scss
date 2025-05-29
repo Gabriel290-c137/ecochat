@@ -1,6 +1,6 @@
 ion-content {
   .consejos-container {
-    padding: 1rem;
+    padding: 1.5rem;
     max-width: 600px;
     margin: 0 auto;
 
@@ -8,20 +8,21 @@ ion-content {
       text-align: center;
       margin-bottom: 2rem;
       padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.1);
+      background: #124a35; // Color principal
       border-radius: 20px;
-      border: 1px solid rgba(129, 199, 132, 0.3);
+      border: 1px solid #1e6b4a;
       backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(18, 74, 53, 0.3);
       
       h1 {
-        color: #fff;
+        color: #f0f8f5;
         font-size: 1.8rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
       }
       
       p {
-        color: #e8f5e8;
+        color: #b8e6c5;
         font-size: 1rem;
         margin: 0;
       }
@@ -50,17 +51,20 @@ ion-content {
     }
 
     .consejo-card {
-      background: rgba(255, 255, 255, 0.1);
+      background: #124a35; // Color base para todas las cards
       border-radius: 16px;
       padding: 1.2rem;
-      border: 1px solid rgba(129, 199, 132, 0.3);
+      border: 1px solid #1e6b4a;
       backdrop-filter: blur(5px);
       transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(18, 74, 53, 0.3);
       
       &:hover {
         transform: translateY(-2px);
-        background: rgba(255, 255, 255, 0.15);
-        border-color: rgba(129, 199, 132, 0.5);
+        background: #155540;
+        border-color: #2e7d57;
+        box-shadow: 0 6px 16px rgba(18, 74, 53, 0.4);
       }
       
       .consejo-header {
@@ -77,97 +81,114 @@ ion-content {
           .consejo-name {
             font-size: 1.1rem;
             font-weight: 600;
-            color: #fff;
+            color: #f0f8f5;
             margin: 0;
           }
         }
         
         .tip-badge {
-          background: rgba(129, 199, 132, 0.2);
-          color: #a5d6a7;
+          background: rgba(46, 125, 87, 0.3);
+          color: #90e0a8;
           padding: 0.3rem 0.8rem;
           border-radius: 12px;
           font-size: 0.8rem;
           font-weight: 500;
+          border: 1px solid rgba(144, 224, 168, 0.15);
         }
       }
       
       .consejo-details {
-        color: #e8f5e8;
+        color: #b8e6c5;
         font-size: 0.9rem;
         line-height: 1.4;
         margin: 0;
         
         strong {
-          color: #a5d6a7;
+          color: #90e0a8;
           font-weight: 600;
         }
       }
     }
 
-    // Colores específicos por sección
+    // Variaciones sutiles por sección manteniendo la armonía verde
     .agua-card {
-      border-color: rgba(100, 181, 246, 0.3);
+      border-color: #1a5d43; // Verde azulado sutil
       
       .tip-badge {
-        background: rgba(100, 181, 246, 0.2);
-        color: #90caf9;
+        background: rgba(26, 93, 67, 0.4);
+        color: #a0f0c0;
       }
       
       .consejo-details strong {
-        color: #90caf9;
+        color: #a0f0c0;
+      }
+      
+      &:hover {
+        border-color: #2e7d67;
       }
     }
 
     .energia-card {
-      border-color: rgba(255, 193, 7, 0.3);
+      border-color: #1f5f3a; // Verde amarillento sutil
       
       .tip-badge {
-        background: rgba(255, 193, 7, 0.2);
-        color: #fff176;
+        background: rgba(31, 95, 58, 0.4);
+        color: #b5f0a5;
       }
       
       .consejo-details strong {
-        color: #fff176;
+        color: #b5f0a5;
+      }
+      
+      &:hover {
+        border-color: #3a8f65;
       }
     }
 
     .consumo-card {
-      border-color: rgba(156, 39, 176, 0.3);
+      border-color: #1d4f3d; // Verde púrpura sutil
       
       .tip-badge {
-        background: rgba(156, 39, 176, 0.2);
-        color: #ce93d8;
+        background: rgba(29, 79, 61, 0.4);
+        color: #c0f0b0;
       }
       
       .consejo-details strong {
-        color: #ce93d8;
+        color: #c0f0b0;
+      }
+      
+      &:hover {
+        border-color: #357a5f;
       }
     }
 
     .reciclaje-card {
-      border-color: rgba(76, 175, 80, 0.3);
+      border-color: #1e6b4a; // Verde original
       
       .tip-badge {
-        background: rgba(76, 175, 80, 0.2);
-        color: #a5d6a7;
+        background: rgba(46, 125, 87, 0.4);
+        color: #90e0a8;
       }
       
       .consejo-details strong {
-        color: #a5d6a7;
+        color: #90e0a8;
       }
     }
 
     .movilidad-card {
-      border-color: rgba(255, 87, 34, 0.3);
+      border-color: #1b5438; // Verde rojizo sutil
       
       .tip-badge {
-        background: rgba(255, 87, 34, 0.2);
-        color: #ffab91;
+        background: rgba(27, 84, 56, 0.4);
+        color: #a5f0b5;
       }
       
       .consejo-details strong {
-        color: #ffab91;
+        color: #a5f0b5;
+      }
+      
+      &:hover {
+        border-color: #2f7555;
       }
     }
   }
@@ -176,7 +197,7 @@ ion-content {
 // Responsive
 @media (max-width: 480px) {
   ion-content .consejos-container {
-    padding: 0.5rem;
+    padding: 1rem;
     
     .greeting {
       padding: 1rem;

@@ -31,9 +31,19 @@ import { RouterModule, Router } from '@angular/router';
 export class HomePage implements OnInit {
   constructor(private router: Router) {}
 
+  // Ir específicamente al menú
   irMenu() {
     this.router.navigate(['/menu']);
   }
+
+ navegarA(ruta: string) {
+  if (ruta.startsWith('http')) {
+    window.open(ruta, '_blank');
+  } else {
+    this.router.navigate([ruta]);
+  }
+}
+
 
   ngOnInit() {}
 }

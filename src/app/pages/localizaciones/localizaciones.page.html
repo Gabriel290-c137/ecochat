@@ -13,7 +13,7 @@
     </div>
     
     <div class="locations-grid">
-      <div class="location-card recycling-card" (click)="irAlLugar()">
+      <div class="location-card recycling-card" (click)="irAlLugar(-21.533520725684145, -64.68836447323733)">
         <div class="location-header">
           <div class="location-info">
             <h3 class="location-name">Centro Municipal de reciclaje</h3>
@@ -24,13 +24,15 @@
           Horario: Lun-Sáb 8:00-18:00
         </p>
         <div class="location-actions">
-          <ion-button fill="clear" size="small" class="action-btn">
+          <ion-button fill="clear" size="small" class="action-btn"
+           (click)="$event.stopPropagation(); irAlLugar(-21.533520725684145, -64.68836447323733)"
+          >
             Ir
           </ion-button>
         </div>
       </div>
 
-      <div class="location-card recycling-card" (click)="irAlLugar()">
+      <div class="location-card recycling-card" (click)="irAlLugar(-21.51606453845192, -64.74592762451674)">
         <div class="location-header">
           <div class="location-info">
             <h3 class="location-name">Reciclajes Tarija</h3>
@@ -42,13 +44,15 @@
           Horario: Lunes-Viernes 14:00-18:00
         </p>
         <div class="location-actions">
-          <ion-button fill="clear" size="small" class="action-btn">
+          <ion-button fill="clear" size="small" class="action-btn"
+          (click)="$event.stopPropagation(); irAlLugar(-21.51606453845192, -64.74592762451674)"
+          >
             Ir
           </ion-button>
         </div>
       </div>
 
-      <div class="location-card recycling-card" (click)="irAlLugar()">
+      <div class="location-card recycling-card" (click)="irAlLugar(-21.54352378587114, -64.74425455445532)">
         <div class="location-header">
           <div class="location-info">
             <h3 class="location-name">Recicladora Virgen de Urkupiña</h3>
@@ -59,7 +63,9 @@
           Horario: Lun-Vie 8:00-19:00
         </p>
         <div class="location-actions">
-          <ion-button fill="clear" size="small" class="action-btn">
+          <ion-button fill="clear" size="small" class="action-btn"
+          (click)="$event.stopPropagation(); irAlLugar(-21.54352378587114, -64.74425455445532)"
+          >
             Ir
           </ion-button>
         </div>
@@ -72,7 +78,7 @@
     </div>
     
     <div class="locations-grid">
-      <div class="location-card tourism-card" (click)="irAlLugar()">
+      <div class="location-card tourism-card" (click)="irAlLugar(-21.716721483227662, -65.07053808993732)">
         <div class="location-header">
           <div class="location-info">
             <h3 class="location-name">Reserva Biológica de la Cordillera de Sama</h3>
@@ -84,7 +90,9 @@
           Accesible todo el año, cuando no llueve
         </p>
         <div class="location-actions">
-          <ion-button fill="clear" size="small" class="action-btn">
+          <ion-button fill="clear" size="small" class="action-btn"
+          (click)="$event.stopPropagation(); irAlLugar(-21.716721483227662, -65.07053808993732)"
+          >
             Ir
           </ion-button>
           <ion-button fill="clear" size="small" class="action-btn"
@@ -94,7 +102,7 @@
         </div>
       </div>
 
-      <div class="location-card tourism-card" (click)="irAlLugar()">
+      <div class="location-card tourism-card" (click)="irAlLugar(-21.52631722205689, -64.73828291742043)">
         <div class="location-header">
           <div class="location-info">
             <h3 class="location-name">Parque de las Flores</h3>
@@ -105,7 +113,9 @@
           Un lugar hermoso y tranquilo en la zona La Loma, entre las calles Cochabamba y Aniceto Arce, ideal para relajarse y disfrutar de la vista, los árboles y las flores.<br>
         </p>
         <div class="location-actions">
-          <ion-button fill="clear" size="small" class="action-btn">
+          <ion-button fill="clear" size="small" class="action-btn"
+          (click)="$event.stopPropagation(); irAlLugar(-21.52631722205689, -64.73828291742043)"
+          >
             Ir
           </ion-button>
           <ion-button fill="clear" size="small" class="action-btn"
