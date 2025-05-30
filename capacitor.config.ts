@@ -3,7 +3,7 @@ import { KeyboardResize } from '@capacitor/keyboard';
 
 const config: CapacitorConfig = {
   appId: 'com.ecochat.myapp',
-  appName: 'ecochat',
+  appName: 'Ecochat',
   webDir: 'www',
   plugins: {
     PushNotifications: {

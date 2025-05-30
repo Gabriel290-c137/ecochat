@@ -1,193 +1,288 @@
-// Título centrado sin sombras
-.centered-title {
-  text-align: center;
+// Header styling
+ion-header {
   box-shadow: none !important;
-  font-weight: 600;
-  color: #ffffff;
+  border-bottom: none !important;
+
+  ion-toolbar {
+    --background: transparent !important;
+    --border-width: 0 !important;
+    --box-shadow: none !important;
+    box-shadow: none !important;
+    border: none !important;
+
+    ion-title {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      color: #ffffff;
+    }
+  }
 }
 
-// Contenedor principal
-.donation-container {
-  max-width: 400px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 1rem;
+// Main content styling
+ion-content {
+  .donations-container {
+    padding: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
 
-  // Header con icono
-  .donation-header {
-    margin-bottom: 2rem;
-    
-
-    .eco-icon {
-      font-size: 3rem;
-      color: #ccdbcd;
-      margin-bottom: 1rem;
-    }
-
-    h1 {
-      color: #ffffff;
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin: 0;
-      line-height: 1.3;
-    }
-  }
-
-  // Mensaje de donación
-  .donation-message {
-    margin-bottom: 2.5rem;
-
-    .main-text {
-      color: #ffffff;
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-      text-align: justify;
-    }
-
-    // Lista de causas
-    .causes-list {
+    // Section headers
+    .section-header {
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: 0.8rem;
-      margin: 1.5rem 0;
+      margin: 2rem 0 1.5rem 0;
+      padding: 0 0.5rem;
 
-      .cause-item {
+      .section-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #fff;
+        margin: 0;
+      }
+    }
+
+    // Main donation card
+    .donation-card {
+      background: #124a35;
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid #1e6b4a;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 12px rgba(18, 74, 53, 0.3);
+      margin-bottom: 1.5rem;
+
+      .donation-header {
+        text-align: center;
+        margin-bottom: 2rem;
+
+        .donation-title {
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: #f0f8f5;
+          margin: 0 0 1rem 0;
+          line-height: 1.3;
+        }
+
+        .donation-subtitle {
+          font-size: 1rem;
+          color: #b8e6c5;
+          font-weight: 400;
+          margin: 0;
+        }
+      }
+
+      // Mission statement
+      .mission-statement {
+        background: rgba(46, 125, 87, 0.1);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(144, 224, 168, 0.15);
+
+        .mission-text {
+          color: #f0f8f5;
+          font-size: 1rem;
+          line-height: 1.6;
+          text-align: justify;
+          margin: 0;
+        }
+      }
+
+      // Impact areas
+      .impact-areas {
+        margin-bottom: 1rem;
+
+        .impact-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 0.8rem;
+        }
+
+        .impact-item {
+          background: rgba(46, 125, 87, 0.1);
+          border-radius: 12px;
+          padding: 1rem;
+          border: 1px solid rgba(144, 224, 168, 0.15);
+          transition: all 0.3s ease;
+
+          &:hover {
+            background: rgba(46, 125, 87, 0.2);
+            transform: translateX(5px);
+          }
+
+          .impact-text {
+            color: #f0f8f5;
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    // QR section
+    .qr-section {
+      background: #124a35;
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid #1e6b4a;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 12px rgba(18, 74, 53, 0.3);
+      text-align: center;
+      margin-bottom: 1.5rem;
+
+      .qr-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #f0f8f5;
+        margin-bottom: 1.5rem;
+      }
+
+      .qr-container {
+        background: rgba(46, 125, 87, 0.1);
+        border-radius: 16px;
+        padding: 2rem;
+        border: 2px dashed rgba(144, 224, 168, 0.3);
+        margin-bottom: 1rem;
+
+        .qr-image {
+          max-width: 200px;
+          width: 100%;
+          height: auto;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          transition: transform 0.3s ease;
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+
+      .qr-description {
+        color: #b8e6c5;
+        font-size: 0.9rem;
+        font-style: italic;
+        margin: 0;
+      }
+    }
+
+    // Gratitude section
+    .gratitude-section {
+      background: rgba(46, 125, 87, 0.2);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid rgba(144, 224, 168, 0.2);
+      text-align: center;
+      margin-bottom: 1.5rem;
+
+      .thank-you {
+        color: #f0f8f5;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+      }
+    }
+
+    // Contact information
+    .contact-info {
+      background: #124a35;
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid #1e6b4a;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 12px rgba(18, 74, 53, 0.3);
+
+      .contact-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #f0f8f5;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .contact-item {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
-        gap: 0.8rem;
-        padding: 0.5rem;
-        background: rgba(76, 175, 80, 0.1);
-        border-radius: 8px;
-        transition: transform 0.2s ease;
+        justify-content: center;
+        margin-bottom: 0.8rem;
+        color: #b8e6c5;
+        font-size: 0.9rem;
 
-        &:hover {
-          transform: translateX(5px);
-        }
-
-        ion-icon {
-          color: #6ad56d;
-          font-size: 1.2rem;
-          flex-shrink: 0;
-        }
-
-        span {
-          color: #ffffff;
-          font-size: 0.9rem;
-          font-weight: 500;
+        &:last-child {
+          margin-bottom: 0;
         }
       }
-    }
-  }
-
-  // Sección del QR
-  .qr-section {
-    margin-bottom: 2rem;
-
-    h2 {
-      color: #ffffff;
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-    }
-
-    .qr-container {
-      display: flex;
-      justify-content: center;
-      margin: 1.5rem 0;
-      padding: 1.5rem;
-      background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(139, 195, 74, 0.1));
-      border-radius: 16px;
-      border: 2px dashed #72c475;
-
-      .qr-image {
-        max-width: 200px;
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-
-        &:hover {
-          transform: scale(1.05);
-        }
-      }
-    }
-
-    .qr-description {
-      color: #ffffff;
-      font-size: 0.9rem;
-      font-style: italic;
-      margin-top: 1rem;
-    }
-  }
-
-  // Sección de agradecimiento
-  .gratitude-section {
-    .thank-you {
-      color: #ffffff;
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 0;
-      padding: 1rem;
-      background: rgba(76, 175, 80, 0.1);
-      border-radius: 12px;
     }
   }
 }
 
 // Responsive design
 @media (max-width: 480px) {
-  .donation-container {
-    padding: 0.5rem;
+  ion-content .donations-container {
+    padding: 1rem;
 
-    .donation-header {
-      h1 {
-        font-size: 1.3rem;
+    .donation-card,
+    .qr-section,
+    .contact-info {
+      padding: 1.5rem;
+    }
+
+    .donation-card .donation-header {
+      .donation-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    .section-header {
+      margin: 1.5rem 0 1rem 0;
+
+      .section-title {
+        font-size: 1.2rem;
       }
     }
 
     .qr-section {
       .qr-container {
-        padding: 1rem;
-        
+        padding: 1.5rem;
+
         .qr-image {
           max-width: 160px;
         }
       }
     }
 
-    .causes-list {
-      .cause-item {
-        padding: 0.6rem;
-        
-        span {
-          font-size: 0.85rem;
-        }
+    .impact-areas .impact-item {
+      padding: 0.8rem;
+
+      .impact-text {
+        font-size: 0.9rem;
       }
     }
   }
 }
 
-// Animaciones suaves
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+// Animations - Solo para escritorio
+@media (min-width: 768px) {
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .donations-container > * {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
   }
-}
 
-.donation-container > * {
-  animation: fadeInUp 0.6s ease-out;
-  animation-fill-mode: both;
+  .donation-card { animation-delay: 0.1s; }
+  .qr-section { animation-delay: 0.2s; }
+  .gratitude-section { animation-delay: 0.3s; }
+  .contact-info { animation-delay: 0.4s; }
 }
-
-.donation-header { animation-delay: 0.1s; }
-.donation-message { animation-delay: 0.2s; }
-.qr-section { animation-delay: 0.3s; }
-.gratitude-section { animation-delay: 0.4s; }
