@@ -20,25 +20,28 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.init();
     this.themeService.initializeTheme();
+    this.detectSafeAreaSupport(); // 👈 AÑADIDO
   }
 
   init() {
     if (Capacitor.isNativePlatform()) {
-      // Inicializa las notificaciones push (si aún las necesitas para otras funcionalidades)
-      // this.notificationsService.initPush();
-
-      // Inicia las notificaciones locales repetitivas para la fase de prueba
       this.notificationsService.startPruebaNotifications();
       this.noticationsPushService.init();
       this.themeService.initializeTheme();
-      // Si necesitas iniciar las notificaciones reales en algún punto (no al inicio),
-      // puedes tener otra función o lógica para eso.
-      // Por ejemplo:
-      // setTimeout(() => {
-      //   this.notificationsService.startRealNotifications();
-      // }, 5000); // Iniciar después de 5 segundos
     } else {
       console.log('No es una plataforma nativa, las notificaciones locales no se iniciarán.');
+    }
+  }
+
+  // 👇 NUEVA FUNCIÓN
+  detectSafeAreaSupport() {
+    const topInset = window.getComputedStyle(document.documentElement)
+      .getPropertyValue('--safe-area-inset-top');
+
+    if (topInset && parseInt(topInset) > 0) {
+      document.body.classList.add('with-safe-area');
+    } else {
+      document.body.classList.add('no-safe-area');
     }
   }
 }

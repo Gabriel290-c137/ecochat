@@ -36,10 +36,6 @@
     @import "@ionic/angular/css/palettes/dark.class.css"; 
 /* @import '@ionic/angular/css/palettes/dark.system.css'; */
 
-ion-item {
-    --transition: none;
-  }
-
 /* --- Fuente Ginto: estilos normales --- */
 @font-face {
   font-family: 'Ginto';
@@ -120,3 +116,22 @@ ion-item {
 * {
   font-family: 'Ginto', sans-serif;
 }
+
+// ion-header {
+//   padding-top: 32px;
+
+//   @media (min-width: 768px) {
+//     padding-top: env(safe-area-inset-top);
+//   }
+// }
+
+// ion-toolbar {
+//   --background: transparent;
+//   background: transparent !important;
+//   box-shadow: none !important;
+//   z-index: 32;
+
+//   @media (min-width: 768px) {
+//     padding-top: env(safe-area-inset-top);
+//   }
+// }

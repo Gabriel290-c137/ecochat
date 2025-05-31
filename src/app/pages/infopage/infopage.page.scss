@@ -13,7 +13,7 @@ ion-content {
       
       .hero-icon {
         font-size: 4rem;
-        color: #81c784;
+        color: #71ac74;
         margin-bottom: 1rem;
         animation: bounce 2s infinite;
       }
@@ -21,13 +21,12 @@ ion-content {
       .hero-title {
         font-size: 2.2rem;
         font-weight: 800;
-        color: #fff;
         margin: 0.5rem 0;
         text-shadow: 0 2px 4px rgba(0,0,0,0.3);
       }
       
       .hero-subtitle {
-        color: #a5d6a7;
+        color: #71ac74;
         margin: 0;
       }
     }
@@ -61,7 +60,6 @@ ion-content {
       h2 {
         font-size: 1.2rem;
         font-weight: 700;
-        color: #fff;
         margin: 0;
       }
     }
@@ -73,13 +71,12 @@ ion-content {
     }
      
     p {
-      color: #e8f5e8;
       font-size: 0.95rem;
       line-height: 1.6;
       margin: 0;
       text-align: justify;
       
-      strong { color: #a5d6a7; font-weight: 600; }
+      strong { color: #71ac74; font-weight: 600; }
     }
 
     .developers-grid {
@@ -99,13 +96,12 @@ ion-content {
       
       .developer-icon, .uni-icon {
         font-size: 2.5rem;
-        color: #a5d6a7;
+        color: #71ac74;
       }
       
       h3 {
         font-size: 1rem;
         font-weight: 600;
-        color: #fff;
         margin: 0;
         line-height: 1.3;
       }
@@ -125,7 +121,6 @@ ion-content {
       p {
         font-size: 1rem;
         font-weight: 600;
-        color: #fff;
       }
     }
   }

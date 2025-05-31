@@ -18,7 +18,7 @@ const config: CapacitorConfig = {
       scopes: ['profile', 'email'],
       serverClientId: '213178519857-cj2o8phkkq3vohh1kcmoe49f5lpkvr38.apps.googleusercontent.com',
       forceCodeForRefreshToken: true
-    }
+    },
   },
 };
 

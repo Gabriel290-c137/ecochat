@@ -287,14 +287,14 @@ export class MenuPage implements OnInit {
     this.respuesta = '';
 
     try {
-      // // Obtener la respuesta de Gemini (según si hay imagen o no)
-      // if (base64) {
-      // // Descomenta esta línea si tienes el método con imagen disponible
-      //   this.respuesta = await this.geminiService.generateResponseWithImage(preguntaActual, base64);
-      // } else {
-      // // Descomenta esta línea si tienes el método sin imagen disponible
-      //   this.respuesta = await this.geminiService.generateResponse(preguntaActual);
-      // }
+      // Obtener la respuesta de Gemini (según si hay imagen o no)
+      if (base64) {
+      // Descomenta esta línea si tienes el método con imagen disponible
+        this.respuesta = await this.geminiService.generateResponseWithImage(preguntaActual, base64);
+      } else {
+      // Descomenta esta línea si tienes el método sin imagen disponible
+        this.respuesta = await this.geminiService.generateResponse(preguntaActual);
+      }
 
       const respuestaActual = this.respuesta || 'Respuesta simulada';
       const fechaRespuesta = new Date();
@@ -585,6 +585,17 @@ verificarInput() {
       }, 100);
     }
   }
+
+    formatearTexto(texto: string): string {
+      if (!texto) return '';
+
+      // Elimina asteriscos dobles y emojis simples (puedes expandir esta lógica)
+      texto = texto.replace(/\*\*/g, '');
+      texto = texto.replace(/[\u{1F600}-\u{1F6FF}]/gu, ''); // Emojis
+
+      // Convierte los saltos de línea en <br>
+      return texto.replace(/\n/g, '<br>');
+    }
 
     ngOnInit() {
     this.authService.userReady.subscribe(user => {

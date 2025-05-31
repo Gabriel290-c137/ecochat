@@ -23,6 +23,7 @@
     --background: transparent;
     background: transparent !important;
   }
+  
 }
 
 ::ng-deep ion-textarea.eco-input textarea {
@@ -147,6 +148,15 @@
       text-align: left;
       margin-bottom: 20px;
 
+      .respuesta-asistente {
+        font-size: 16px;
+        line-height: 1.7;          // Interlineado
+        border-radius: 16px;
+        white-space: pre-wrap;     // Mantiene los saltos de línea
+        overflow-wrap: break-word;
+        display: inline-block;
+      }
+
       .botones-accion {
         margin-top: 10px;
         display: flex;
@@ -171,7 +181,7 @@
           line-height: 1;
           flex: 0 0 auto;
 
-          --color: #aee5d4;           
+          --color: #aee5d4;
           --background: #124a35;
           --border-radius: 16px;
           --box-shadow: none;

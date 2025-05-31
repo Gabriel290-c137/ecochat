@@ -10,9 +10,9 @@ export class NoticationsService {
 
   async scheduleRepeatingNotificationsForPrueba() {
     const messages = [
-      'No te olvides cerrar',
-      'Desconectar',
-      'Botar la basura en su lugar'
+      'No olvides cerrar el agua. 💧',
+      'Desconecta siempre para ahorrar. 🔌',
+      'Bota la basura a reciclar. ♻️'
     ];
     const repetitionCount = 6;
     const intervalInSeconds = 10;

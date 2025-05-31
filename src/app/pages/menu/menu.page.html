@@ -52,7 +52,8 @@
 
         <!-- Asistente -->
         <div *ngIf="mensaje.from === 'assistant'" class="mensaje assistant" (touchstart)="onTouchStart(mensaje)" (touchend)="onTouchEnd()">
-          {{ mensaje.text }}
+          <div class="respuesta-asistente" [innerHTML]="formatearTexto(mensaje.text)"></div>
+
 
           <!-- Botones de acción -->
           <div class="botones-accion">
@@ -175,12 +176,11 @@
     <div class="eco-actions">
       <!-- Izquierda -->
       <div class="eco-left">
-        <ion-button shape="round" size="small" fill="clear" (click)="irHome()">
-          <ion-icon slot="icon-only" name="logo-firefox"></ion-icon>
+        <ion-button shape="round" size="small" fill="clear" (click)="irHome()" style="padding: 0; --padding-start: 0; --padding-end: 0;">
+          <img src="assets/icon/Ecochat2.png" alt="EcoChat" style="width: 40px; height: 40px; margin-right: 4px;" />
         </ion-button>
 
-        <ion-label class="textCenter">EcoChat</ion-label>
-
+        <ion-label class="textCenter" style="margin-left: 0;">EcoChat</ion-label>
       </div>
 
       <!-- Derecha -->
@@ -188,7 +188,7 @@
         <ion-button shape="round" fill="clear" (click)="irLocalizaciones()" [disabled]="isLoading">
           <ion-icon slot="icon-only" name="locate"></ion-icon>
         </ion-button>
-        
+
         <ion-button *ngIf="pregunta.trim().length > 0" shape="round" fill="clear" (click)="obtenerRespuesta()" [disabled]="isLoading">
           <ion-icon slot="icon-only" name="send"></ion-icon>
         </ion-button>
@@ -198,13 +198,12 @@
         </ion-button>
       </div>
     </div>
-
   </div>
 </ion-footer>
 
 <!-- Botón flotante -->
 <ion-fab vertical="bottom" horizontal="end" slot="fixed"
-          [style.marginBottom]="isKeyboardOpen ? '-5px' : '10px'"
+          [style.marginBottom]="isKeyboardOpen ? '-5px' : '15px'"
           class="custom-fab">
   <ion-fab-button color="dark" size="small" (click)="abrirFabYReenfocar()">
     <ion-icon name="add"></ion-icon>

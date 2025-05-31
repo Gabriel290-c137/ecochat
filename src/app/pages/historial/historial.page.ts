@@ -57,8 +57,8 @@ export class HistorialPage {
   colecciones: { nombre: string, fecha: string, alias: string, timestamp: Date }[] = [];
   cargando = true;
   loteActual = 0;
-  tamañoLote = 4;
-  totalMaximo = 5;
+  tamañoLote = 5;
+  totalMaximo = 20;
   mostrarModal = false;
   coleccionSeleccionada: any = null;
   mostrarModalCambiarNombre = false;  // Controla la visibilidad del modal para cambiar nombre
