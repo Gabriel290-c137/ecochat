@@ -390,32 +390,6 @@ async usarPregunta(pregunta: string, mensaje: any) {
       this.numeroConversacion === 1 ? 'Conversacion' : `Conversacion${this.numeroConversacion}`;
   }
 
-  enviar() {
-    if (this.pregunta.trim() === '') {
-      return;
-    }
-
-    const preguntaActual = this.pregunta;
-
-    this.mensajes.push({
-      from: 'user',
-      text: preguntaActual,
-      date: new Date()
-    });
-
-    this.pregunta = '';
-
-    this.ecoChatService.enviarPregunta(preguntaActual).subscribe((res) => {
-      this.respuesta = res.respuesta;
-
-      this.mensajes.push({
-        from: 'assistant',
-        text: this.respuesta,
-        date: new Date()
-      });
-    });
-  }
-
   grabarAudio() {
     if (!this.microphoneService.isRecording) {
       this.microphoneService.startListening((textoReconocido: string) => {
@@ -605,10 +579,10 @@ verificarInput() {
     });
 
     const user = this.authService.getUsuario() || this.authGoogle.getUsuario();
-    if (user) {
-      this.correo = user.email || '';
-      const nombreCompleto = user.displayName || this.generarNombreDesdeCorreo(user.email || '');
-      this.nombre = nombreCompleto.split(' ')[0];
-    }
+      if (user) {
+        this.correo = user.email || '';
+        const nombreCompleto = user.displayName || this.generarNombreDesdeCorreo(user.email || '');
+        this.nombre = nombreCompleto.split(' ')[0];
+      }
   }
 }
