@@ -13,5 +13,29 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon } from '@ionic/ang
 export class DonacionesPage implements OnInit {
   constructor() { }
   ngOnInit() {
+
+    this.detectSystemTheme();
+    
+      // Escuchar cambios en el tema del sistema
+      if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+          this.detectSystemTheme();
+        });
+      }
+
   }
+
+  private detectSystemTheme() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (prefersDark) {
+      document.body.classList.add('dark');
+      
+    } else {
+      document.body.classList.remove('dark');
+     
+    }
+
+  }
+
 }

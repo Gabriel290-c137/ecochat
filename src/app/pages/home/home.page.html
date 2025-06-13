@@ -4,7 +4,8 @@
     <!-- Header de bienvenida -->
     <div class="greeting">
       <h1>¡Me alegra verte! </h1>
-      <p>Consejos para cuidar el medio ambiente</p>
+      <p>Aqui tines algunos consejos para </p>
+      <p>cuidar el medio ambiente</p>
     </div>
 
     <!-- Sección de Ahorro de Agua -->
@@ -14,29 +15,29 @@
     
     <div class="consejos-grid">
       <div class="consejo-card agua-card" (click)="navegarA('https://www.promart.pe/blog/8-consejos-como-ahorrar-agua-en-casa')">
-        <div class="consejo-header">
-          <div class="consejo-info">
-            <h3 class="consejo-name">Ahorra agua en casa</h3>
-          </div>
-          <span class="tip-badge">Fácil</span>
+        <div class="consejo-icon">
+          <img src="assets/images/agua.png" alt="Ahorro de agua">
         </div>
-        <p class="consejo-details">
-          Cierra el grifo mientras te cepillas los dientes, toma duchas cortas y repara fugas inmediatamente.<br>
-          <strong>Ahorro:</strong> Hasta 150 litros diarios
-        </p>
+        <div class="consejo-content">
+          <div class="consejo-header">
+            <div class="texto-container">
+              <h3 class="consejo-name">Cuidado del Agua</h3>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="consejo-card agua-card" (click)="navegarA('https://reducereutilizarecicla.org/como-ahorrar-agua/')">
-        <div class="consejo-header">
-          <div class="consejo-info">
-            <h3 class="consejo-name">Reutiliza el agua</h3>
-          </div>
-          <span class="tip-badge">Intermedio</span>
+        <div class="consejo-icon">
+          <img src="assets/images/reutilizar-agua.png" alt="Reutilizar agua">
         </div>
-        <p class="consejo-details">
-          Usa el agua de lavar verduras para regar plantas y recolecta agua de lluvia.<br>
-          <strong>Beneficio:</strong> Reduce consumo en 30%
-        </p>
+        <div class="consejo-content">
+          <div class="consejo-header">
+              <div class="texto-container">
+                <h3 class="consejo-name">Reutiliza el agua</h3>
+              </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -47,42 +48,43 @@
     
     <div class="consejos-grid">
       <div class="consejo-card energia-card" (click)="navegarA('https://www.infobae.com/america/tecno/2022/04/21/por-que-es-importante-desconectar-los-aparatos-electricos-cuando-no-se-esta-en-casa/')">
-        <div class="consejo-header">
-          <div class="consejo-info">
-            <h3 class="consejo-name">Desconecta dispositivos</h3>
-          </div>
-          <span class="tip-badge">Fácil</span>
+        <div class="consejo-icon">
+          <img src="assets/images/desconectar.png" alt="Desconectar dispositivos">
         </div>
-        <p class="consejo-details">
-          Los aparatos en "stand by" siguen consumiendo energía. Desenchúfalos cuando no los uses.<br>
-          <strong>Ahorro:</strong> 10% en tu factura eléctrica
-        </p>
+        <div class="consejo-content">
+          <div class="consejo-header">
+            <div class="texto-container">
+              <h3 class="consejo-name">Desconectar Dispositivos</h3>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="consejo-card energia-card" (click)="navegarA('https://algsa.es/es/noticia/iluminacion-led-y-sostenibilidad-como-contribuye-al-medio-ambiente/')">
-        <div class="consejo-header">
-          <div class="consejo-info">
-            <h3 class="consejo-name">Bombillas LED</h3>
-          </div>
-          <span class="tip-badge">Inversión</span>
+        <div class="consejo-icon">
+          <img src="assets/images/led.png" alt="Bombillas LED">
         </div>
-        <p class="consejo-details">
-          Las bombillas LED duran 25 veces más que las incandescentes y consumen 80% menos energía.<br>
-          <strong>Duración:</strong> Hasta 25,000 horas
-        </p>
+        <div class="consejo-content">
+          <div class="consejo-header">
+            <div class="texto-container">
+              <h3 class="consejo-name">Uso de Bombillas LED</h3>
+            </div>
+          
+          </div>
+        </div>
       </div>
 
       <div class="consejo-card energia-card" (click)="navegarA('https://euroclima.info/climatizacion-sostenible/')">
-        <div class="consejo-header">
-          <div class="consejo-info">
-            <h3 class="consejo-name">Climatización sostenible</h3>
-          </div>
-          <span class="tip-badge">Hábito</span>
+        <div class="consejo-icon">
+          <img src="assets/images/climatizacion.png" alt="Climatización sostenible">
         </div>
-        <p class="consejo-details">
-          Ajusta la temperatura a 22°C en invierno y 24°C en verano. Ventila tu hogar naturalmente.<br>
-          <strong>Tip:</strong> Cada grado supone 7% de consumo
-        </p>
+        <div class="consejo-content">
+          <div class="consejo-header">
+            <div class="texto-container">
+              <h3 class="consejo-name">Climatización sostenible</h3>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -93,29 +95,29 @@
     
     <div class="consejos-grid">
       <div class="consejo-card consumo-card" (click)="navegarA('https://www.bbva.com/es/sostenibilidad/compras-sostenibles-a-granel-sin-plasticos-y-evitando-el-desperdicio-alimentario/')">
-        <div class="consejo-header">
-          <div class="consejo-info">
-            <h3 class="consejo-name">Compra a granel</h3>
-          </div>
-          <span class="tip-badge">Económico</span>
+        <div class="consejo-icon">
+          <img src="assets/images/granel.png" alt="Compra a granel">
         </div>
-        <p class="consejo-details">
-          Evita empaques innecesarios comprando al peso. Lleva tus propios contenedores reutilizables.<br>
-          <strong>Reduce:</strong> 60% de residuos plásticos
-        </p>
+        <div class="consejo-content">
+          <div class="consejo-header">
+            <div class="texto-container">
+              <h3 class="consejo-name">Compra a granel</h3>
+            </div>
+          </div>          
+        </div>
       </div>
 
       <div class="consejo-card consumo-card" (click)="navegarA('https://clickoala.com/noticias/consumo-local-que-es-ejemplos/')">
-        <div class="consejo-header">
-          <div class="consejo-info">
-            <h3 class="consejo-name">Consume local</h3>
-          </div>
-          <span class="tip-badge">Social</span>
+        <div class="consejo-icon">
+          <img src="assets/images/local.png" alt="Consume local">
         </div>
-        <p class="consejo-details">
-          Compra productos de tu región. Apoyas la economía local y reduces emisiones por transporte.<br>
-          <strong>Impacto:</strong> Menos CO2 y productos más frescos
-        </p>
+        <div class="consejo-content">
+          <div class="consejo-header">
+            <div class="texto-container">
+              <h3 class="consejo-name">Consume local</h3>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -126,19 +128,18 @@
     
     <div class="consejos-grid">
       <div class="consejo-card reciclaje-card" (click)="navegarA('https://lcc.eco/procesos-de-reciclaje-y-reutilizacion/')">
-        <div class="consejo-header">
-          <div class="consejo-info">
-            <h3 class="consejo-name">Separa correctamente</h3>
-          </div>
-          <span class="tip-badge">Esencial</span>
+        <div class="consejo-icon">
+          <img src="assets/images/reciclaje.png" alt="Separar correctamente">
         </div>
-        <p class="consejo-details">
-          Separa papel, plástico, vidrio y orgánicos. Limpia los envases antes de reciclar.<br>
-          <strong>Resultado:</strong> 90% de materiales se aprovechan
-        </p>
+        <div class="consejo-content">
+          <div class="consejo-header">
+            <div class="texto-container">
+              <h3 class="consejo-name">Separa correctamente</h3>
+            </div>
+          </div>
+          
+        </div>
       </div>
-
-      
     </div>
 
     <!-- Sección de Movilidad -->
@@ -148,25 +149,26 @@
     
     <div class="consejos-grid">
       <div class="consejo-card movilidad-card" (click)="navegarA('https://www.barterenergy.es/medios-de-transporte-ecologicos/')">
-        <div class="consejo-header">
-          <div class="consejo-info">
-            <h3 class="consejo-name">Transporte ecológico</h3>
-          </div>
-          <span class="tip-badge">Saludable</span>
+        <div class="consejo-icon">
+          <img src="assets/images/transporte.png" alt="Transporte ecológico">
         </div>
-        <p class="consejo-details">
-          Camina, usa bicicleta o transporte público. Comparte viajes cuando sea posible.<br>
-          <strong>Beneficio:</strong> Ejercicio + menos contaminación
-        </p>
+        <div class="consejo-content">
+          <div class="consejo-header">
+            <div class="texto-container">
+              <h3 class="consejo-name">Transporte ecológico</h3>
+            </div>
+          </div>
+          
+        </div>
       </div>
     </div>
 
   </div>
 </ion-content>
 
-  <!-- Botón flotante -->
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button color="success" (click)="irMenu()">
-      <ion-icon name="leaf-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+<!-- Botón flotante -->
+<div class="custom-fab-container">
+  <button class="custom-fab-button" (click)="irMenu()">
+    <ion-icon name="leaf-outline"></ion-icon>
+  </button>
+</div>

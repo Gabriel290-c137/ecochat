@@ -184,34 +184,170 @@ ion-content {
         margin: 0;
       }
     }
+  }
+}
 
-    // Contact information
+// Responsive design
+@media (max-width: 480px) {
+  ion-content .donations-container {
+    padding: 1rem;
+
+    .donation-card,
+    .qr-section,
     .contact-info {
-      background: #124a35;
-      border-radius: 16px;
       padding: 1.5rem;
-      border: 1px solid #1e6b4a;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 4px 12px rgba(18, 74, 53, 0.3);
+    }
 
-      .contact-title {
+    .donation-card .donation-header {
+      .donation-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    .section-header {
+      margin: 1.5rem 0 1rem 0;
+
+      .section-title {
         font-size: 1.2rem;
-        font-weight: 600;
-        color: #f0f8f5;
-        margin-bottom: 1rem;
-        text-align: center;
+      }
+    }
+
+    .qr-section {
+      .qr-container {
+        padding: 1.5rem;
+
+        .qr-image {
+          max-width: 160px;
+        }
+      }
+    }
+
+    .impact-areas .impact-item {
+      padding: 0.8rem;
+
+      .impact-text {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+// Animations - Solo para escritorio
+@media (min-width: 768px) {
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .donations-container > * {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+  }
+
+  .donation-card { animation-delay: 0.1s; }
+  .qr-section { animation-delay: 0.2s; }
+  .gratitude-section { animation-delay: 0.3s; }
+  .contact-info { animation-delay: 0.4s; }
+}
+
+// ADAPTACIÓN PARA MODO CLARO
+@media (prefers-color-scheme: light) {
+  ion-header {
+    ion-toolbar {
+      ion-title {
+        color: #2d5a3d; // Verde oscuro para contraste en modo claro
+      }
+    }
+  }
+
+  ion-content {
+    .donations-container {
+      .section-header {
+        .section-title {
+          color: #1a4a35; // Verde muy oscuro para el título
+        }
       }
 
-      .contact-item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 0.8rem;
-        color: #b8e6c5;
-        font-size: 0.9rem;
+      // Main donation card
+      .donation-card {
+        background: rgba(216, 250, 209, 0);
+        border: 1px solid rgba(18, 74, 53, 0.3);
+        box-shadow: 0 4px 12px rgba(18, 74, 53, 0.1);
 
-        &:last-child {
-          margin-bottom: 0;
+        .donation-header {
+          .donation-title {
+            color: #1a4a35; // Verde muy oscuro
+          }
+
+          .donation-subtitle {
+            color: #2d5a3d; // Verde oscuro
+          }
+        }
+
+        // Mission statement
+        .mission-statement {
+          background: rgba(201, 235, 180, 0.318);
+          border: 1px solid rgba(18, 74, 53, 0.2);
+
+          .mission-text {
+            color: #1a4a35;
+          }
+        }
+
+        // Impact areas
+        .impact-areas {
+          .impact-item {
+            background: rgba(129,199,132,0.15);
+            border: 1px solid rgba(18, 74, 53, 0.2);
+
+            &:hover {
+              background: rgba(160, 230, 185, 0.6);
+            }
+
+            .impact-text {
+              color: #1a4a35;
+            }
+          }
+        }
+      }
+
+      // QR section
+      .qr-section {
+        background: rgba(216, 250, 209, 0);
+        border: 1px solid rgba(18, 74, 53, 0.3);
+        box-shadow: 0 4px 12px rgba(18, 74, 53, 0.1);
+
+        .qr-title {
+          color: #1a4a35;
+        }
+
+        .qr-container {
+          background: rgba(129,199,132,0.15);
+          border: 2px dashed rgba(18, 74, 53, 0.4);
+
+          .qr-image {
+            box-shadow: 0 4px 12px rgba(18, 74, 53, 0.15);
+          }
+        }
+
+        .qr-description {
+          color: #2d5a3d;
+        }
+      }
+
+      // Gratitude section
+      .gratitude-section {
+        background: rgba(216, 250, 209, 0);
+        border: 1px solid rgba(18, 74, 53, 0.25);
+
+        .thank-you {
+          color: #1a4a35;
         }
       }
     }
@@ -284,5 +420,4 @@ ion-content {
   .donation-card { animation-delay: 0.1s; }
   .qr-section { animation-delay: 0.2s; }
   .gratitude-section { animation-delay: 0.3s; }
-  .contact-info { animation-delay: 0.4s; }
 }

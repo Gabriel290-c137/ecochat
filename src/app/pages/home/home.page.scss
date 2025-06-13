@@ -5,26 +5,24 @@ ion-content {
     margin: 0 auto;
 
     .greeting {
-      text-align: center;
-      margin-bottom: 2rem;
-      padding: 1.5rem;
-      background: #124a35; // Color principal
-      border-radius: 20px;
-      border: 1px solid #1e6b4a;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 4px 12px rgba(18, 74, 53, 0.3);
-      
+      text-align: left;
+      margin-top: 0rem !important;
+      padding: 1.5rem ;
+      margin-bottom: -2.5rem !important;
+
+
       h1 {
-        color: #f0f8f5;
-        font-size: 1.8rem;
+        color: white;
+        font-size: 2.2rem !important;         
         font-weight: 700;
         margin-bottom: 0.5rem;
       }
       
       p {
-        color: #b8e6c5;
-        font-size: 1rem;
+        color: white;
+        font-size: 1rem !important;
         margin: 0;
+
       }
     }
 
@@ -36,10 +34,11 @@ ion-content {
       padding: 0 0.5rem;
       
       .section-title {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #fff;
+        font-size: 1.5rem !important;
+        font-weight: 500;
+        color: var(--ion-text-color);
         margin: 0;
+        margin-top: 2rem; // Agrega margen solo arriba
       }
     }
 
@@ -51,56 +50,121 @@ ion-content {
     }
 
     .consejo-card {
-      background: #124a35; // Color base para todas las cards
-      border-radius: 16px;
-      padding: 1.2rem;
-      border: 1px solid #1e6b4a;
-      backdrop-filter: blur(5px);
-      transition: all 0.3s ease;
+      // Efecto glassmorphism como en la referencia
+      height: 150px;
+      background: rgba(18, 74, 53, 0.6); // Tu color base con transparencia
+      border-radius: 36px; // Más redondeado como la referencia
+      padding: 0.2rem 1rem; // SEPARADO: vertical pegado, horizontal con más espacio
+      border: 1px solid rgba(30, 107, 74, 0.4);
+      backdrop-filter: blur(15px); // Efecto glassmorphism
+      -webkit-backdrop-filter: blur(15px); // Safari
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(18, 74, 53, 0.3);
+      box-shadow: 
+        0 8px 32px rgba(18, 74, 53, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1); // Brillo interno
+      display: flex;
+      align-items: center; // CAMBIADO: centro para que la imagen y texto estén alineados
+      gap: 1rem; // Reducido el gap
+      position: relative;
+      overflow: hidden;
       
       &:hover {
-        transform: translateY(-2px);
-        background: #155540;
-        border-color: #2e7d57;
-        box-shadow: 0 6px 16px rgba(18, 74, 53, 0.4);
+        transform: translateY(-8px) scale(1.02); // Movimiento más pronunciado
+        background: rgba(18, 74, 53, 0.8);
+        border-color: rgba(30, 107, 74, 0.6);
+        box-shadow: 
+          0 16px 48px rgba(18, 74, 53, 0.25),
+          0 0 0 1px rgba(255, 255, 255, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        
+        &::before {
+          left: 100%;
+        }
+        
+        .consejo-icon {
+          transform: scale(1.05); // Reducido el scale para evitar overflow
+          box-shadow: 0 8px 24px rgba(18, 74, 53, 0.3);
+        }
+      }
+      
+      .consejo-icon {
+        width: 200px; // AUMENTADO para ocupar más espacio horizontal
+        height: 146px; // AUMENTADO para ocupar casi toda la altura (150px - 4px de padding total)
+        border-radius: 32px; // Ajustado para que combine con el border-radius de la card
+        background: rgba(46, 125, 87, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: 1px solid rgba(144, 224, 168, 0.2);
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        box-shadow:
+          0 4px 16px rgba(18, 74, 53, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 28px; // AJUSTADO: ligeramente menor que el contenedor (32px - 4px)
+        }
+      }
+      
+      .consejo-content {
+        flex: 1;
+        min-width: 0; // Para que el texto no se desborde
+        height: 100%; // Ocupa toda la altura disponible
+        display: flex;
+        align-items: flex-end; // MANTIENE: alinea el contenido hacia abajo
+        padding-bottom: 1rem; // AUMENTADO: más espacio desde el borde inferior
       }
       
       .consejo-header {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 0.8rem;
-        
-        .consejo-info {
+        align-items: flex-end; // CAMBIADO: alinea hacia abajo
+        gap: 1rem;
+        width: 100%; // Ocupa todo el ancho disponible
+
+        .texto-container {
           display: flex;
-          align-items: center;
-          gap: 0.8rem;
+          align-items: flex-end;  // MANTIENE: alineación hacia abajo
+          justify-content: flex-start; // Alineado a la izquierda
+          flex: 1; // Para que ocupe todo el espacio disponible
           
           .consejo-name {
-            font-size: 1.1rem;
-            font-weight: 600;
             color: #f0f8f5;
+            font-size: 1.2rem !important; // AUMENTADO: un poco más grande para mejor visibilidad
+            font-weight: 500;
             margin: 0;
+            line-height: 1.2; // Mejor espaciado de línea
+
           }
         }
         
         .tip-badge {
-          background: rgba(46, 125, 87, 0.3);
+          background: rgba(46, 125, 87, 0.4);
           color: #90e0a8;
-          padding: 0.3rem 0.8rem;
-          border-radius: 12px;
+          padding: 0.4rem 0.9rem;
+          border-radius: 16px; // Más redondeado
           font-size: 0.8rem;
           font-weight: 500;
-          border: 1px solid rgba(144, 224, 168, 0.15);
+          border: 1px solid rgba(144, 224, 168, 0.2);
+          backdrop-filter: blur(8px);
+          box-shadow: 
+            0 2px 8px rgba(18, 74, 53, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          white-space: nowrap;
+          flex-shrink: 0;
         }
       }
       
       .consejo-details {
         color: #b8e6c5;
         font-size: 0.9rem;
-        line-height: 1.4;
+        line-height: 1.5; // Mejor legibilidad
         margin: 0;
         
         strong {
@@ -110,13 +174,20 @@ ion-content {
       }
     }
 
-    // Variaciones sutiles por sección manteniendo la armonía verde
+    // Mantener tus variaciones de colores pero con el nuevo estilo
     .agua-card {
-      border-color: #1a5d43; // Verde azulado sutil
+      background: rgba(26, 93, 67, 0.6);
+      border-color: rgba(26, 93, 67, 0.4);
+      
+      .consejo-icon {
+        background: rgba(26, 93, 67, 0.5);
+        border-color: rgba(160, 240, 192, 0.2);
+      }
       
       .tip-badge {
-        background: rgba(26, 93, 67, 0.4);
+        background: rgba(26, 93, 67, 0.5);
         color: #a0f0c0;
+        border-color: rgba(160, 240, 192, 0.2);
       }
       
       .consejo-details strong {
@@ -124,16 +195,24 @@ ion-content {
       }
       
       &:hover {
-        border-color: #2e7d67;
+        background: rgba(26, 93, 67, 0.8);
+        border-color: rgba(46, 125, 103, 0.6);
       }
     }
 
     .energia-card {
-      border-color: #1f5f3a; // Verde amarillento sutil
+      background: rgba(31, 95, 58, 0.6);
+      border-color: rgba(31, 95, 58, 0.4);
+      
+      .consejo-icon {
+        background: rgba(31, 95, 58, 0.5);
+        border-color: rgba(181, 240, 165, 0.2);
+      }
       
       .tip-badge {
-        background: rgba(31, 95, 58, 0.4);
+        background: rgba(31, 95, 58, 0.5);
         color: #b5f0a5;
+        border-color: rgba(181, 240, 165, 0.2);
       }
       
       .consejo-details strong {
@@ -141,16 +220,24 @@ ion-content {
       }
       
       &:hover {
-        border-color: #3a8f65;
+        background: rgba(31, 95, 58, 0.8);
+        border-color: rgba(58, 143, 101, 0.6);
       }
     }
 
     .consumo-card {
-      border-color: #1d4f3d; // Verde púrpura sutil
+      background: rgba(29, 79, 61, 0.6);
+      border-color: rgba(29, 79, 61, 0.4);
+      
+      .consejo-icon {
+        background: rgba(29, 79, 61, 0.5);
+        border-color: rgba(192, 240, 176, 0.2);
+      }
       
       .tip-badge {
-        background: rgba(29, 79, 61, 0.4);
+        background: rgba(29, 79, 61, 0.5);
         color: #c0f0b0;
+        border-color: rgba(192, 240, 176, 0.2);
       }
       
       .consejo-details strong {
@@ -158,29 +245,49 @@ ion-content {
       }
       
       &:hover {
-        border-color: #357a5f;
+        background: rgba(29, 79, 61, 0.8);
+        border-color: rgba(53, 122, 95, 0.6);
       }
     }
 
     .reciclaje-card {
-      border-color: #1e6b4a; // Verde original
+      background: rgba(30, 107, 74, 0.6);
+      border-color: rgba(30, 107, 74, 0.4);
+      
+      .consejo-icon {
+        background: rgba(46, 125, 87, 0.5);
+        border-color: rgba(144, 224, 168, 0.2);
+      }
       
       .tip-badge {
-        background: rgba(46, 125, 87, 0.4);
+        background: rgba(46, 125, 87, 0.5);
         color: #90e0a8;
+        border-color: rgba(144, 224, 168, 0.2);
       }
       
       .consejo-details strong {
         color: #90e0a8;
       }
+      
+      &:hover {
+        background: rgba(30, 107, 74, 0.8);
+        border-color: rgba(46, 125, 87, 0.6);
+      }
     }
 
     .movilidad-card {
-      border-color: #1b5438; // Verde rojizo sutil
+      background: rgba(27, 84, 56, 0.6);
+      border-color: rgba(27, 84, 56, 0.4);
+      
+      .consejo-icon {
+        background: rgba(27, 84, 56, 0.5);
+        border-color: rgba(165, 240, 181, 0.2);
+      }
       
       .tip-badge {
-        background: rgba(27, 84, 56, 0.4);
+        background: rgba(27, 84, 56, 0.5);
         color: #a5f0b5;
+        border-color: rgba(165, 240, 181, 0.2);
       }
       
       .consejo-details strong {
@@ -188,7 +295,205 @@ ion-content {
       }
       
       &:hover {
-        border-color: #2f7555;
+        background: rgba(27, 84, 56, 0.8);
+        border-color: rgba(47, 117, 85, 0.6);
+      }
+    }
+  }
+}
+
+// ADAPTACIÓN PARA MODO CLARO
+@media (prefers-color-scheme: light) {
+  ion-content .consejos-container {
+    .greeting {
+      h1 {
+        color: #1c4e25; // Verde oscuro para contraste en modo claro
+      }
+      
+      p {
+        color: #1c4e25; // Verde oscuro para contraste en modo claro
+      }
+    }
+
+    .section-header {
+      .section-title {
+        color: #1c4e25; // Verde muy oscuro para el título
+      }
+    }
+
+    .consejo-card {
+      background: rgba(220, 245, 230, 0.8); // Fondo claro verdoso
+      border: 1px solid rgba(18, 74, 53, 0.3);
+      box-shadow: 
+        0 8px 32px rgba(18, 74, 53, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      
+      &:hover {
+        background: rgba(200, 240, 220, 0.9);
+        border-color: rgba(18, 74, 53, 0.5);
+        box-shadow: 
+          0 16px 48px rgba(18, 74, 53, 0.15),
+          0 0 0 1px rgba(18, 74, 53, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      }
+      
+      .consejo-icon {
+        background: rgba(180, 235, 200, 0.7);
+        border: 1px solid rgba(18, 74, 53, 0.3);
+        box-shadow:
+          0 4px 16px rgba(18, 74, 53, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      }
+      
+      .consejo-header {
+        .texto-container {
+          .consejo-name {
+            color: #1c4e25; // Verde muy oscuro para el nombre
+          }
+        }
+        
+        .tip-badge {
+          background: rgba(150, 220, 170, 0.8);
+          color: #0f3a2a;
+          border: 1px solid rgba(18, 74, 53, 0.3);
+          box-shadow: 
+            0 2px 8px rgba(18, 74, 53, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+      }
+      
+      .consejo-details {
+        color: #2d5a3d;
+        
+        strong {
+          color: #1a4a35;
+        }
+      }
+    }
+
+    // Variaciones para modo claro
+    .agua-card {
+      background: rgba(212, 243, 211, 0);
+      border-color: rgba(26, 93, 67, 0.3);
+      
+      .consejo-icon {
+        background: rgba(170, 235, 210, 0.7);
+        border-color: rgba(26, 93, 67, 0.3);
+      }
+      
+      .tip-badge {
+        background: rgba(140, 220, 180, 0.8);
+        color: #0a3d2f;
+        border-color: rgba(26, 93, 67, 0.3);
+      }
+      
+      .consejo-details strong {
+        color: #0a3d2f;
+      }
+      
+      &:hover {
+        background: rgba(190, 240, 225, 0.9);
+        border-color: rgba(26, 93, 67, 0.5);
+      }
+    }
+
+    .energia-card {
+      background: rgba(212, 243, 211, 0);
+      border-color: rgba(31, 95, 58, 0.3);
+      
+      .consejo-icon {
+        background: rgba(175, 235, 195, 0.7);
+        border-color: rgba(31, 95, 58, 0.3);
+      }
+      
+      .tip-badge {
+        background: rgba(171, 255, 183, 0.656);
+        color: #0f3f2a;
+        border-color: rgba(31, 95, 58, 0.3);
+      }
+      
+      .consejo-details strong {
+        color: #0f3f2a;
+      }
+      
+      &:hover {
+        background: rgba(195, 240, 210, 0.9);
+        border-color: rgba(31, 95, 58, 0.5);
+      }
+    }
+
+    .consumo-card {
+      background: rgba(212, 243, 211, 0);
+      border-color: rgba(29, 79, 61, 0.3);
+      
+      .consejo-icon {
+        background: rgba(185, 235, 185, 0.7);
+        border-color: rgba(29, 79, 61, 0.3);
+      }
+      
+      .tip-badge {
+        background: rgba(155, 220, 155, 0.8);
+        color: #0d3b28;
+        border-color: rgba(29, 79, 61, 0.3);
+      }
+      
+      .consejo-details strong {
+        color: #0d3b28;
+      }
+      
+      &:hover {
+        background: rgba(205, 240, 200, 0.9);
+        border-color: rgba(29, 79, 61, 0.5);
+      }
+    }
+
+    .reciclaje-card {
+      background: rgba(212, 243, 211, 0);
+      border-color: rgba(30, 107, 74, 0.3);
+      
+      .consejo-icon {
+        background: rgba(180, 235, 200, 0.7);
+        border-color: rgba(30, 107, 74, 0.3);
+      }
+      
+      .tip-badge {
+        background: rgba(150, 220, 170, 0.8);
+        color: #0f4a32;
+        border-color: rgba(30, 107, 74, 0.3);
+      }
+      
+      .consejo-details strong {
+        color: #0f4a32;
+      }
+      
+      &:hover {
+        background: rgba(200, 240, 215, 0.9);
+        border-color: rgba(30, 107, 74, 0.5);
+      }
+    }
+
+    .movilidad-card {
+      background: rgba(212, 243, 211, 0);
+      border-color: rgba(27, 84, 56, 0.3);
+      
+      .consejo-icon {
+        background: rgba(172, 235, 198, 0.7);
+        border-color: rgba(27, 84, 56, 0.3);
+      }
+      
+      .tip-badge {
+        background: rgba(142, 220, 168, 0.8);
+        color: #0c3d2b;
+        border-color: rgba(27, 84, 56, 0.3);
+      }
+      
+      .consejo-details strong {
+        color: #0c3d2b;
+      }
+      
+      &:hover {
+        background: rgba(192, 240, 213, 0.9);
+        border-color: rgba(27, 84, 56, 0.5);
       }
     }
   }
@@ -221,17 +526,106 @@ ion-content {
     }
     
     .consejo-card {
-      padding: 1rem;
+      padding: 0.15rem 0.6rem; // SEPARADO: vertical mínimo, horizontal con espacio
+      gap: 1rem;
+      
+      .consejo-icon {
+        width: 140px; // AUMENTADO en mobile
+        height: 130px; // AUMENTADO para ocupar más altura en mobile
+        border-radius: 26px;
+        
+        img {
+          border-radius: 16px;
+        }
+      }
       
       .consejo-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
+        .texto-container {
+          .consejo-name {
+            font-size: 1rem; // REDUCIDO para mobile
+          }
+        }
         
         .tip-badge {
           align-self: flex-end;
         }
       }
+    }
+  }
+}
+
+//boton
+
+// Botón flotante personalizado
+.custom-fab-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  
+  .custom-fab-button {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    // Modo claro
+    background: #83bd76;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    
+    // Decoración X
+    &::before {
+      content: 'X';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 130%); 
+      font-size: 1rem !important; 
+      color: #ffffff;
+    }
+    
+    ion-icon {
+      font-size: 24px;
+    }
+  }
+  
+  // Modo oscuro
+  @media (prefers-color-scheme: dark) {
+    .custom-fab-button {
+      background: #23864e;
+      color: black;
+      box-shadow: 0 4px 12px rgba(32, 201, 151, 0.3);
+      
+      &::before {
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+// Responsivo
+@media (max-width: 768px) {
+  .custom-fab-container .custom-fab-button {
+    width: 56px;
+    height: 56px;
+    
+    ion-icon {
+      font-size: 20px;
+    }
+    
+    &::before {
+      width: 18px;
+      height: 18px;
+      font-size: 12px;
+      top: -6px;
+      right: -6px;
     }
   }
 }

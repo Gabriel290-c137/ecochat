@@ -45,5 +45,29 @@ export class HomePage implements OnInit {
 }
 
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.detectSystemTheme();
+    
+      // Escuchar cambios en el tema del sistema
+      if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+          this.detectSystemTheme();
+        });
+      }
+
+  }
+
+  private detectSystemTheme() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (prefersDark) {
+      document.body.classList.add('dark');
+      
+    } else {
+      document.body.classList.remove('dark');
+     
+    }
+
+  }
 }
